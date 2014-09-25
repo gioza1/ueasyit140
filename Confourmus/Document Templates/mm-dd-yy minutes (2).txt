@@ -1,0 +1,30 @@
+January 5, 2010 (Tuesday)
+
+Time Frame: 12:00 - 5:00
+
+Venue: LB445TC
+
+Attendees:
+tonet   5 hrs
+
+erwin	5 hrs
+
+chad   3hrs
+
+charina	2hrs
+
+Total Time: 15 hours
+
+Agenda:
+Discussed Req Specs 
+Tasks assignment
+
+Issues:
+specs too many and broad
+
+Action Items:
+Finalize the ff:
+error messages
+required fields
+labels
+nonfunctional requirements
