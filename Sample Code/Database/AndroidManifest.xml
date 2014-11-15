@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.database"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".Crud"
+            android:label="Database process" >
+            <intent-filter>
+                <action android:name="Crud" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".Insert"
+            android:label="@string/title_activity_insert" >
+        </activity>
+        <activity
+            android:name=".Edit"
+            android:label="@string/title_activity_edit" >
+        </activity>
+        <activity
+            android:name=".DelData"
+            android:label="@string/title_activity_del_data" >
+        </activity>
+        <activity
+            android:name=".Read"
+            android:label="@string/title_activity_read" >
+        </activity>
+        <activity
+            android:name=".CRUD"
+            android:label="@string/title_activity_splash" >
+        </activity>
+    </application>
+
+</manifest>
