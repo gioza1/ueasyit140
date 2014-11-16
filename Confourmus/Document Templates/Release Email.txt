@@ -1,0 +1,25 @@
+
+
+[Release Email Template]
+
+Email Subject: [CS145][IT145]  <Project Name> Release
+
+<Email Body Start>
+
+To: Erwin Sarmiento
+Cc: <TEAMMATES EMAIL ADDRESSES>
+
+Good day!
+
+<Project Name> release version xx.yy.zz has now been stored to <absolute path of source code location>.
+
+
+Please see attached release notes and LOC count for details.
+
+Thank you.
+
+Best regards,
+<CM NAME> or <APL NAME if CM is unable to perform release>
+
+<Email Body End>
+

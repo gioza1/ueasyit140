@@ -1,0 +1,127 @@
+=====================================================================
+[PROJECT NAME]............ <Project Name>
+[RELEASE VERSION]......... xx.yy.zz
+[RELEASE DATE]............ 2014/11/21
+[PLATFORM / VERSION]...... Java V1.6.0_45
+                           CentOS release 6.3 (Final)
+                           Apache Tomcat 6.0.35
+
+[SUPPORTED MODULES] ------------------------------------------------
+
+    1. Alarm Management
+    2. Alarm Suppression 
+    3. Backup Management
+    4. Controller Management
+    5. DHCP 
+    6. File Transfer
+    7. LAN
+    8. Network 
+    9. Network Test
+    10. NWLayer
+
+
+[LIMITATIONS] -------------------------------------------------------
+    
+    1.  [MODULENAME/COMMON] System version number is not yet displayed in footer.
+
+
+[KNOWN BUGS] --------------------------------------------------------
+    
+    1. <UT/IT-BUG NUMBER>[SNMP Alarms] User will not know if search/ retrieve operation has finished when no results are found
+    2. <UT/IT-BUG NUMBER>[DHCP Management] Missing error popup when popup screen is invoked
+    3. <UT/IT-BUG NUMBER>[Time Sync Management] Missing popup showing error when VRC is down
+    4. <UT/IT-BUG NUMBER>[Version][Specific Operation - Abnormal] Error is not displayed when clicking specific button
+    5. <UT/IT-BUG NUMBER>[Time Sync Management] No data is displayed when NTP daemon is not running
+    
+[FIXED BUGS] --------------------------------------------------------
+
+     1. <UT/IT-BUG NUMBER> : [Account Management] Deleted User can still perform Operation.
+     2. <UT/IT-BUG NUMBER> : [SNMP Alarms] Permission Denied Error occurs in SNMP Alarm popup after clicking Maintenance menu link.
+     3. <UT/IT-BUG NUMBER> : [DHCP Management] When Apache server is shut down, no error message is displayed on succeeding page operations. 
+     4. <UT/IT-BUG NUMBER> : [Physical Port] When Apache surver is shut down, SNMP Alarm icon disappears after clicking it.
+     5. <UT/IT-BUG NUMBER> : [File Transfer] Error occurs when refresh is clicked after retrieve data is rendered
+
+
+[RELEASE FILES] -----------------------------------------------------
+
+    1. <APPLICATION FILENAME>
+     Filename: PROJECTNAME_YYYY_Release_02.00.15.tgz
+    2. <DATABASE BACKUP FILENAME>
+     Filename: SDN-NWC-DB_20131025_Release_02.00.15.backup
+
+
+[ADDED FILES] -------------------------------------------------------
+
+     1. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase)  :
+        SDN/WebContent/ver/version.ver
+        
+     2. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase)  :
+        SDN/WebContent/js/snmpalarms_common.js
+        SDN/WebContent/js/snmpalarms_title.js
+        
+     3. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase)  :
+        SDN/WebContent/js/snmpalarms_common.js
+        SDN/WebContent/js/snmpalarms_title.js
+
+
+[MODIFIED FILES]  ---------------------------------------------------
+
+     1. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase)  : 
+        SDN/src/jp/co/nec/sdn/webui/user/service/UserService.java
+        SDN/WebContent/WEB-INF/config/sdn-security.xml
+     
+     2. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase) : 
+        SDN/WebContent/js/login.js
+        SDN/WebContent/css/snmpalarms.css
+        SDN/WebContent/js/popupOperation.js
+        SDN/WebContent/js/snmpalarms_icon.js
+        SDN/WebContent/js/snmpalarms_page.js
+        SDN/WebContent/WEB-INF/jsp/snmpalarms/alarm_icon.jsp
+        SDN/WebContent/WEB-INF/jsp/snmpalarms/alarm_view.jsp
+        SDN/WebContent/WEB-INF/jsp/title_menu.jsp
+        SDN/src/jp/co/nec/sdn/webui/operationlog/AspectLogger.java
+
+
+[REMOVED FILES] -----------------------------------------------------
+
+    1. <MODULE NAME> (if CODING phase) or <UT/IT-BUG NUMBER> (if TESTING phase) 
+        SDN/WebContent/css/snmpalarms_ie.css
+        SDN/WebContent/img/alarm_violet.bmp
+        SDN/WebContent/img/alarm_yellow.bmp
+
+    
+[VIRUS CHECK] -------------------------------------------------------
+
+    1. McAfee VirusScan Enterprise 
+       Version 8.8.0(8.8.0.849)
+
+
+[SPECIAL COMMENTS] --------------------------------------------------
+
+    1.  Location of release files were moved because CM's laptop was reformatted. 
+
+
+[DESTINATION] -------------------------------------------------------
+- The release files can be accessed in the following location
+
+    1.  <absolute path of source code location>
+
+
+[RELEASE MEMO] ------------------------------------------------------
+- The release notes is sent to the following recipients
+
+    1. Erwin Sarmiento       <esarmiento0302@gmail.com>
+    2. PL                    <email address>
+    3. APL                   <email address>
+    4. Recorder              <email address>
+
+
+
+=====================================================================
+
+APPROVED BY: <PL NAME>
+
+//nothing follows
+
+
+
