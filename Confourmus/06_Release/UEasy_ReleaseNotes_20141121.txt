@@ -1,0 +1,117 @@
+=====================================================================
+[PROJECT NAME]............ USC Easy Access for Students and You (U-EASY)
+[RELEASE VERSION]......... v1.00.00
+[RELEASE DATE]............ 2014/11/21
+[PLATFORM / VERSION]...... Android 13 and newer
+                           Java 1.8
+
+[SUPPORTED MODULES] ------------------------------------------------
+
+    1. About
+    2. Category 
+    3. Search
+    4. Map
+    
+
+[LIMITATIONS] -------------------------------------------------------
+    
+    1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
+    2.  [ABOUT] There are only 10 questions shown.
+    3.  [MAP] Still under development. Still not fully functional.
+
+
+[KNOWN BUGS] --------------------------------------------------------
+    
+    
+[FIXED BUGS] --------------------------------------------------------
+
+
+[RELEASE FILES] -----------------------------------------------------
+
+    1. <APPLICATION FILENAME>
+     Filename: PROJECTNAME_YYYY_Release_02.00.15.tgz
+    2. <DATABASE BACKUP FILENAME>
+     Filename: SDN-NWC-DB_20131025_Release_02.00.15.backup
+
+
+[ADDED FILES] -------------------------------------------------------
+
+    1. About :
+       UEASY\it140\activities\AboutAndFaqs.java
+       UEASY\it140\adapters\FaqsAdapter.java
+       UEASY\it140\adapters\TabPagerAdapter.java
+       UEASY\src\ueasy\it140\fragments\AboutFragment.java
+       UEASY\src\ueasy\it140\fragments\FaqFragment.java
+       UEASY\res\layout\activity_aboutandfaqs.xml
+       UEASY\res\layout\fragment_about.xml
+       UEASY\res\layout\fragment_faqs.xml
+       UEASY\res\layout\fragments_faqs_item.xml
+        
+    2. Category :
+       UEASY\it140\activities\Category.java
+       UEASY\it140\activities\RoomCategory.java
+       UEASY\it140\activities\SpecificCategory.java
+       UEASY\it140\adapters\CategoryAdapter.java
+       UEASY\it140\adapters\RoomAdapter.java
+       UEASY\res\layout\activity_category.xml
+       UEASY\res\layout\activity_category_list.xml
+       UEASY\res\layout\activity_room.xml
+       UEASY\res\layout\activity_room_group.xml
+       UEASY\res\layout\activity_room_item.xml
+
+    3. Search :
+       UEASY\it140\activities\Search.java
+       UEASY\res\layout\search.xml
+       UEASY\res\layout\search_item.xml
+
+    4. Map :
+       UEASY\it140\activities\Campus.java
+       UEASY\it140\activities\Map.java
+       UEASY\it140\adapters\CampusAdapter.java
+       UEASY\src\ueasy\it140\models\CampusModel.java
+       UEASY\res\layout\activity_campus.xml
+       UEASY\res\layout\activity_campus_item.xml
+       UEASY\res\layout\activity_map.xml
+
+[MODIFIED FILES]  ---------------------------------------------------
+
+
+
+[REMOVED FILES] -----------------------------------------------------
+
+
+    
+[VIRUS CHECK] -------------------------------------------------------
+
+    1. Avast
+       Version 141121-0
+
+
+[SPECIAL COMMENTS] --------------------------------------------------
+
+    
+
+[DESTINATION] -------------------------------------------------------
+- The release files can be accessed in the following location
+
+    1.  D:\UEASY
+
+
+[RELEASE MEMO] ------------------------------------------------------
+- The release notes is sent to the following recipients
+
+    1. Erwin Sarmiento       <esarmiento0302@gmail.com>
+    2. Jacob Borromeo        <lupyduby@gmail.com>
+    3. Gio Niño Mendoza      <mendoza.gionino@gmail.com>
+    4. Julius Adrian Chin    <jedaxxxx@gmail.com>
+
+
+
+=====================================================================
+
+APPROVED BY: Jacob Borromeo
+
+//nothing follows
+
+
+
