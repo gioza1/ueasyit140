@@ -18,7 +18,7 @@
     
     1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
     2.  [ABOUT] There are only 10 questions shown.
-    3.  [MAP] Still under development. Still not fully functional.
+    3.  [MAP] Only default markers are shown.
 
 
 [KNOWN BUGS] --------------------------------------------------------
@@ -48,7 +48,7 @@
        UEASY\it140\specificCategories\RoomCategory.java
 
     3. Map :
-       UEASY\res\layout\marker_bubble.xml
+       UEASY\res\layout\bonuspack_bubble.xml
 
 [MODIFIED FILES]  ---------------------------------------------------
 
