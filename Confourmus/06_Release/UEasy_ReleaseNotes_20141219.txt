@@ -1,0 +1,105 @@
+=====================================================================
+[PROJECT NAME]............ USC Easy Access for Students and You (U-EASY)
+[RELEASE VERSION]......... v2.00.00
+[RELEASE DATE]............ 2014/12/19
+[PLATFORM / VERSION]...... Android 13 and newer
+                           Java 1.8
+
+[SUPPORTED MODULES] ------------------------------------------------
+
+    1. About
+    2. Category 
+    3. Search
+    4. Map
+    5. View Amenity Information
+    
+
+[LIMITATIONS] -------------------------------------------------------
+    
+    1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
+    2.  [ABOUT] There are only 10 questions shown.
+    3.  [MAP] Still under development. Still not fully functional.
+
+
+[KNOWN BUGS] --------------------------------------------------------
+    
+    
+[FIXED BUGS] --------------------------------------------------------
+
+
+[RELEASE FILES] -----------------------------------------------------
+
+    1. <APPLICATION FILENAME>
+     Filename: PROJECTNAME_YYYY_Release_02.00.15.tgz
+    2. <DATABASE BACKUP FILENAME>
+     Filename: SDN-NWC-DB_20131025_Release_02.00.15.backup
+
+
+[ADDED FILES] -------------------------------------------------------
+
+    1. View Amenity Information :
+       UEASY\it140\database\Database.java
+        
+    2. Category :
+       UEASY\it140\specificCategories\BuildingCategory.java
+       UEASY\it140\specificCategories\FacilitiesCategory.java
+       UEASY\it140\specificCategories\FoodAndBeverages.java
+       UEASY\it140\specificCategories\OfficesCategory.java
+       UEASY\it140\specificCategories\RoomCategory.java
+
+    3. Map :
+       UEASY\res\layout\marker_bubble.xml
+
+[MODIFIED FILES]  ---------------------------------------------------
+
+    1. Map :
+       UEASY\it140\activities\Map.java
+
+    2. Search :
+       UEASY\it140\activities\Search.java
+
+    3. Category :
+       UEASY\it140\activities\Category.java
+
+
+[REMOVED FILES] -----------------------------------------------------
+
+    1. Category :
+       UEASY\it140\activities\RoomCategory.java
+       UEASY\it140\specificCategories\SpecificCategory.java
+
+    
+[VIRUS CHECK] -------------------------------------------------------
+
+    1. Avast
+       Version 141121-0
+
+
+[SPECIAL COMMENTS] --------------------------------------------------
+
+    
+
+[DESTINATION] -------------------------------------------------------
+- The release files can be accessed in the following location
+
+    1.  D:\UEASY
+
+
+[RELEASE MEMO] ------------------------------------------------------
+- The release notes is sent to the following recipients
+
+    1. Erwin Sarmiento       <esarmiento0302@gmail.com>
+    2. Jacob Borromeo        <lupyduby@gmail.com>
+    3. Gio Niño Mendoza      <mendoza.gionino@gmail.com>
+    4. Julius Adrian Chin    <jedaxxxx@gmail.com>
+
+
+
+=====================================================================
+
+APPROVED BY: Jacob Borromeo
+
+//nothing follows
+
+
+
