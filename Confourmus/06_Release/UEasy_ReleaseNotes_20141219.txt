@@ -68,7 +68,7 @@
 
     1. Category :
        UEASY\it140\activities\RoomCategory.java
-       UEASY\it140\specificCategories\SpecificCategory.java
+       UEASY\it140\activities\SpecificCategory.java
 
     
 [VIRUS CHECK] -------------------------------------------------------
