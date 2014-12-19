@@ -19,6 +19,7 @@
     1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
     2.  [ABOUT] There are only 10 questions shown.
     3.  [MAP] Only default markers are shown.
+    4.  [MAP] The current maximum zoom level is limited to what the Osmdroid API offers.
 
 
 [KNOWN BUGS] --------------------------------------------------------
