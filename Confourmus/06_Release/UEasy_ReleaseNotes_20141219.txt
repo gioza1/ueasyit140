@@ -20,6 +20,7 @@
     2.  [ABOUT] There are only 10 questions shown.
     3.  [MAP] Only default markers are shown.
     4.  [MAP] The current maximum zoom level is limited to what the Osmdroid API offers.
+    5.  [MAP] Map will only display building markers.
 
 
 [KNOWN BUGS] --------------------------------------------------------
