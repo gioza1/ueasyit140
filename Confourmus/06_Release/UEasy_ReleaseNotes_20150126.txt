@@ -1,0 +1,114 @@
+=====================================================================
+[PROJECT NAME]............ USC Easy Access for Students and You (U-EASY)
+[RELEASE VERSION]......... v2.00.00
+[RELEASE DATE]............ 2014/12/19
+[PLATFORM / VERSION]...... Android 13 and newer
+                           Java 1.8
+
+[SUPPORTED MODULES] ------------------------------------------------
+
+    1. About
+    2. Category 
+    3. Search
+    4. Map
+    5. View Amenity Information
+    
+
+[LIMITATIONS] -------------------------------------------------------
+    
+    1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
+    2.  [ABOUT] There are only 10 questions shown.
+    3.  [MAP] Only default markers are shown.
+    4.  [MAP] The current maximum zoom level is limited to what the Osmdroid API offers.
+    5.  [MAP] Map will only display building markers.
+
+
+[KNOWN BUGS] --------------------------------------------------------
+    
+    
+[FIXED BUGS] --------------------------------------------------------
+
+
+[RELEASE FILES] -----------------------------------------------------
+
+    1. <APPLICATION FILENAME>
+     Filename: UEASY_2014_Release_02.00.apk
+    2. <DATABASE BACKUP FILENAME>
+     Filename: UEASY-DB_20141219_Release_02.00.backup
+
+
+[ADDED FILES] -------------------------------------------------------
+
+    1. View Amenity Information
+       UEASY\it140\activities\DatabaseObject.java
+        
+    2. Category :
+       UEASY\it140\specificCategories\OtherAmenitiesCategory.java
+       UEASY\res\menu\specific_category.xml
+       UEASY\res\menu\category.xml
+
+    3. Map :
+       UEASY\it140\activities\BoundedMapView.java
+       UEASY\it140\activities\CustomItemizedOverlay.java
+       UEASY\it140\activities\CustomOverlayItem.java
+       UEASY\it140\activities\ISafeCanvas.java
+       UEASY\it140\activities\SafeDrawOverlay.java
+       UEASY\it140\activities\SafePaint.java
+       UEASY\it140\activities\SafeTranslatedCanvas.java
+       UEASY\it140\activities\SafeTranslatedPath.java
+       UEASY\it140\activities\UeasyItemizedOverlay.java
+       UEASY\it140\activities\UeasySplash.java
+       UEASY\res\menu\campus.xml
+
+[MODIFIED FILES]  ---------------------------------------------------
+
+    1. Map :
+       UEASY\it140\activities\Map.java
+
+    2. View Amenity Information :
+       UEASY\it140\database\Database.java
+
+    3. Category :
+       UEASY\it140\specificCategories\BuildingCategory.java
+       UEASY\it140\specificCategories\RoomCategory.java
+
+
+[REMOVED FILES] -----------------------------------------------------
+
+    1. Category :
+       UEASY\it140\specificCategories\FacilitiesCategory.java
+       UEASY\it140\specificCategories\FoodAndBeverages.java
+       UEASY\it140\specificCategories\OfficesCategory.java
+
+    
+[VIRUS CHECK] -------------------------------------------------------
+
+    1. Avast
+       Version 141121-0
+
+
+[SPECIAL COMMENTS] --------------------------------------------------
+
+    
+
+[DESTINATION] -------------------------------------------------------
+- The release files can be accessed in the following location
+
+    1.  D:\UEASY
+
+
+[RELEASE MEMO] ------------------------------------------------------
+- The release notes is sent to the following recipients
+
+    1. Erwin Sarmiento       <esarmiento0302@gmail.com>
+    2. Jacob Borromeo        <lupyduby@gmail.com>
+    3. Gio Niño Mendoza      <mendoza.gionino@gmail.com>
+    4. Julius Adrian Chin    <jedaxxxx@gmail.com>
+
+
+
+=====================================================================
+
+APPROVED BY: Jacob Borromeo
+
+//nothing follows
