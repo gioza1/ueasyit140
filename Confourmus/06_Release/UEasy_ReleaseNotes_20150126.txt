@@ -59,6 +59,7 @@
        UEASY\it140\activities\UeasyItemizedOverlay.java
        UEASY\it140\activities\UeasySplash.java
        UEASY\res\menu\campus.xml
+       UEASY\res\layout\activity_splash.xml
 
 [MODIFIED FILES]  ---------------------------------------------------
 
