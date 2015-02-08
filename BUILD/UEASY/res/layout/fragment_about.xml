@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee" >
+
+        <ImageView
+            android:id="@+id/campusImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/content_about_image"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/campusImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appTitle"
+            android:layout_centerHorizontal="true"
+            android:text="Version 1.0.0"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/copyrightYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/version"
+            android:layout_centerHorizontal="true"
+            android:text="© 2014"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/subProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subFeedback"
+            android:layout_centerHorizontal="true"
+            android:text="@string/sub_problem"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/content_about_image"
+            android:src="@drawable/line" />
+
+        <TextView
+            android:id="@+id/subFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/copyrightYear"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:text="@string/sub_feedback"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/copyright"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#6E6568"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/checkUpdates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/line"
+            android:layout_alignBottom="@+id/copyright"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="30dp"
+            android:clickable="true"
+            android:onClick="checkUpdates"
+            android:text="@string/check_updates"
+            android:textColor="#0a84d1" />
+
+        <TextView
+            android:id="@+id/appDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/checkUpdates"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/line"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/description" />
+
+        <TextView
+            android:id="@+id/emailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/subProblem"
+            android:layout_below="@+id/subProblem"
+            android:paddingTop="5dp"
+            android:text="@string/email_label"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subProblem"
+            android:layout_toRightOf="@+id/emailLabel"
+            android:paddingTop="5dp"
+            android:text="@string/email" />
+    </RelativeLayout>
+
+</ScrollView>
