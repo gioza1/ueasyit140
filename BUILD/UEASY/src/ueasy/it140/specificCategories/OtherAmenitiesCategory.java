@@ -41,9 +41,7 @@ public class OtherAmenitiesCategory extends ListActivity {
 	    
 	    DB = new Database(this);
 	    
-	    List<String> values = DB.Amenities(type);	    
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	        android.R.layout.simple_list_item_1, values);
+
 	    
 	    Intent i = getIntent();
 	    String title = i.getStringExtra("name");
@@ -52,6 +50,10 @@ public class OtherAmenitiesCategory extends ListActivity {
 		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"+title.toUpperCase()+"</font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		
+	    List<String> values = DB.Amenities(type);	    
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	        android.R.layout.simple_list_item_1, values);
+	    
 	    setListAdapter(adapter);
 	  }
 
