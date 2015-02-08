@@ -8,6 +8,7 @@ import ueasy.it140.R;
 import ueasy.it140.database.Database;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,10 +16,13 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Search extends Activity {
@@ -63,6 +67,19 @@ public class Search extends Activity {
 
 		lv.setAdapter(adapter);
 		lv.setVisibility(View.INVISIBLE);
+		
+		lv.setOnItemClickListener(new OnItemClickListener()
+		{
+		    @Override 
+		    public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+		    { 
+
+		 	   String item = (String) adapter.getItem(position);
+				 Intent i = new Intent(getBaseContext(),AmenityBuilding.class);
+		    	 i.putExtra("AmenityName",item);
+		    	 startActivity(i);
+		    }
+		});
 		/**
 		 * Enabling Search Filter
 		 * */
@@ -99,5 +116,9 @@ public class Search extends Activity {
 
 			}
 		});
+		
+		
 	}
+
+	
 }

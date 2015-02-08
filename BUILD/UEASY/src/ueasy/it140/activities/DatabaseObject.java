@@ -7,6 +7,9 @@ public class DatabaseObject {
        double _lng;
        String _name;
        String _info;
+       int _blevels;
+       String _type;
+
 
         // Empty constructor
         public DatabaseObject(){
@@ -19,8 +22,10 @@ public class DatabaseObject {
             this._lng=lng;
             this._name=name;
             this._info=info;
+            
         }
-        public DatabaseObject(double lat, double lng,String name ,String info){
+       
+		public DatabaseObject(double lat, double lng,String name ,String info){
              this._lat=lat;
                 this._lng=lng;
                 this._name=name;
@@ -72,4 +77,17 @@ public class DatabaseObject {
         public void setInfo(String info){
             this._info= info;
         }   
+        
+        public int get_blevels() {
+			return _blevels;
+		}
+		public void setBlevels(int _blevels) {
+			this._blevels = _blevels;
+		}
+		public String get_type() {
+			return _type;
+		}
+		public void setType(String _type) {
+			this._type = _type;
+		}
 }

@@ -8,6 +8,7 @@ import org.osmdroid.util.GeoPoint;
 
 import ueasy.it140.R;
 import ueasy.it140.activities.AboutAndFaqs;
+import ueasy.it140.activities.AmenityBuilding;
 import ueasy.it140.activities.Category;
 import ueasy.it140.activities.Map;
 import ueasy.it140.activities.Search;
@@ -42,7 +43,7 @@ public class BuildingCategory extends ListActivity implements Parcelable {
 	    
 	    DB = new Database(this);
 	    
-	 values = DB.BuildingName();
+	 values = DB.Amenities("Building");
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 	        android.R.layout.simple_list_item_1, values);
 	    
@@ -58,8 +59,11 @@ public class BuildingCategory extends ListActivity implements Parcelable {
 
 	  @Override
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
-	    String item = (String) getListAdapter().getItem(position);
-	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		   String item = (String) getListAdapter().getItem(position);
+		    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+			 Intent i = new Intent(this,AmenityBuilding.class);
+	    	 i.putExtra("AmenityName",item);
+	    	 startActivity(i);
 	  }
 	  
 		@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ueasy.it140.R;
 import ueasy.it140.activities.AboutAndFaqs;
+import ueasy.it140.activities.AmenityBuilding;
 import ueasy.it140.activities.Category;
 import ueasy.it140.activities.Map;
 import ueasy.it140.activities.Search;
@@ -40,7 +41,7 @@ public class OtherAmenitiesCategory extends ListActivity {
 	    
 	    DB = new Database(this);
 	    
-	    List<String> values = DB.OtherAmenities(type);	    
+	    List<String> values = DB.Amenities(type);	    
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 	        android.R.layout.simple_list_item_1, values);
 	    
@@ -58,6 +59,9 @@ public class OtherAmenitiesCategory extends ListActivity {
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
 	    String item = (String) getListAdapter().getItem(position);
 	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		 Intent i = new Intent(this,AmenityBuilding.class);
+    	 i.putExtra("AmenityName",item);
+    	 startActivity(i);
 	  }
 	  
 		@Override

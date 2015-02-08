@@ -6,6 +6,7 @@ import java.util.List;
 
 import ueasy.it140.R;
 import ueasy.it140.activities.AboutAndFaqs;
+import ueasy.it140.activities.AmenityBuilding;
 import ueasy.it140.activities.Category;
 import ueasy.it140.activities.Map;
 import ueasy.it140.activities.Search;
@@ -24,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
@@ -106,14 +108,14 @@ public class RoomCategory extends Activity {
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 				// TODO Auto-generated method stub
-				// Toast.makeText(
-				// getApplicationContext(),
-				// listDataHeader.get(groupPosition)
-				// + " : "
-				// + listDataChild.get(
-				// listDataHeader.get(groupPosition)).get(
-				// childPosition), Toast.LENGTH_SHORT)
-				// .show();
+//				 Toast.makeText(
+//				 getApplicationContext(), listDataHeader.get(groupPosition) + " : " + listDataChild.get(listDataHeader.get(groupPosition)).get( childPosition), Toast.LENGTH_SHORT)
+//				 .show();
+				   String item = (String) listDataChild.get(listDataHeader.get(groupPosition)).get( childPosition);
+					 Intent i = new Intent(v.getContext(),AmenityBuilding.class);
+			    	 i.putExtra("AmenityName",item);
+			    	 startActivity(i);
+//				
 				return false;
 			}
 		});
@@ -153,13 +155,17 @@ public class RoomCategory extends Activity {
 
 		// Adding child data
 		List<String> lb = new ArrayList<String>();
-		lb = DB.ClassroomCode("LB");
+		lb = DB.Amenities("ClassroomLB");
+		String type = "ClassroomLB";
+		Toast.makeText(this, Integer.toString(lb.size()), Toast.LENGTH_SHORT).show();
+		String roomCode = type.substring(9, 11);
+		Toast.makeText(this, roomCode, Toast.LENGTH_SHORT).show();
 
 		List<String> pe = new ArrayList<String>();
-		pe = DB.ClassroomCode("PE");
+		pe = DB.Amenities("ClassroomPE");
 
 		List<String> rh = new ArrayList<String>();
-		rh = DB.ClassroomCode("RH");
+		rh = DB.Amenities("ClassroomRH");
 
 		listDataChild.put(listDataHeader.get(0), lb); // Header, Child data
 		listDataChild.put(listDataHeader.get(1), pe);

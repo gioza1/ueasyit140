@@ -45,7 +45,7 @@ public class Campus extends ListActivity {
 		}
 		
 				
-		DB.BuildingName();
+//		DB.Amenities("Building");
 		
 		ActionBar ab = getActionBar();
 		ab.setTitle("Select Campus");

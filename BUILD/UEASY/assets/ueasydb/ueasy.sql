@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2015 at 01:52 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Generation Time: Feb 07, 2015 at 02:56 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,20 +23,98 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `building`
+-- Table structure for table `amenities`
 --
 
-CREATE TABLE IF NOT EXISTS `building` (
-`b_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `amenities` (
+  `a_id` int(11) NOT NULL AUTO_INCREMENT,
   `c_id` int(11) NOT NULL,
-  `b_name` int(11) NOT NULL,
-  `b_desc` int(11) NOT NULL,
-  `b_pic` int(11) NOT NULL,
-  `b_latitude` int(11) NOT NULL,
-  `b_longitude` int(11) NOT NULL,
-  `b_catName` int(11) NOT NULL,
-  `sync` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bldg_id` int(11) DEFAULT NULL,
+  `a_name` text NOT NULL,
+  `a_desc` text NOT NULL,
+  `a_pic` text NOT NULL,
+  `a_BLevel` int(11) DEFAULT NULL,
+  `a_latitude` text NOT NULL,
+  `a_longitude` text NOT NULL,
+  `a_catName` text NOT NULL,
+  `sync` tinyint(1) NOT NULL DEFAULT '0',
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`a_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+
+--
+-- Dumping data for table `amenities`
+--
+
+INSERT INTO `amenities` (`a_id`, `c_id`, `bldg_id`, `a_name`, `a_desc`, `a_pic`, `a_BLevel`, `a_latitude`, `a_longitude`, `a_catName`, `sync`, `type`) VALUES
+(1, 1, 1, 'Fr. Harold Rigney Hall', 'This is a other amenity', 'Pic1', 1, '10.352322', '123.913373', 'Facility', 1, 'amenity'),
+(2, 1, 1, 'Basketball Court', 'This is a other amenity', 'PIc1', 1, '10.35308', '123.912576', 'Facility', 1, 'amenity'),
+(3, 1, 1, 'Fr. Philip Van Engelen Hall', 'This is a other amenity', 'Pic11', 1, '10.354987', '123.910772', 'Facility', 1, 'amenity'),
+(4, 1, 1, 'Fr. Robert Hoeppener Hall', 'This is a other amenity', 'Pic1', 1, '10.355566', '123.910351', 'Facility', 1, 'amenity'),
+(5, 1, 1, 'CAFA Theatre', 'This is a other amenity', '\r\nPIc1', 1, '10.352432', '123.910717', 'Facility', 1, 'amenity'),
+(6, 1, 1, 'Pabugnawan - Bunzel', 'This is a other amenity', 'PIc1', 1, '10.352631', '123.913504', 'Food and Beverages', 1, 'amenity'),
+(7, 1, 1, 'Tiktilaok - CAS', 'This is a other amenity', 'Pic1', 1, '10.354724', '123.911223', 'Food and Beverages', 1, 'amenity'),
+(8, 1, 1, 'La Cocina - Dormitory', 'This is a other amenity', 'Pic1', 1, '10.354413', '123.91274', 'Food and Beverages', 1, 'amenity'),
+(9, 1, 1, 'Cafe Plus - CAFA', 'This is a other amenity', 'Pic1', 1, '10.352368', '123.91092', 'Food and Beverages', 1, 'amenity'),
+(10, 1, 1, 'Fiesta Delight', 'This is a other amenity', 'Pic1', 1, '10.352032', '123.913822', 'Food and Beverages', 1, 'amenity'),
+(11, 1, 1, 'Audio Visual Office', 'This is a other amenity', 'Pic1', 1, '10.352353', '123.913314', 'Offices', 1, 'amenity'),
+(12, 1, 1, 'CAS Dean''s Office', 'This is a other amenity', 'PIc1', 1, '10.354972', '123.910951', 'Offices', 1, 'amenity'),
+(13, 1, 1, 'Director of Libraries', 'This is a other amenity', 'Pic1', 1, '10.3545', '123.909284', 'Offices', 1, 'amenity'),
+(14, 1, 1, 'Finance Office', 'This is a other amenity', 'Pic1', 1, '10.35236', '123.913219', 'Offices', 1, 'amenity'),
+(15, 1, 1, 'Properties and Administration Office', 'This is a other amenity', 'Pic1', 1, '10.352607', '123.913645', 'Offices', 1, 'amenity'),
+(16, 1, 0, 'Lorenzo Bunzel', 'Just a building', 'Pic1', 0, '10.352122', '123.913156', 'Building', 1, 'amenity'),
+(17, 1, 0, 'Robert Hoeppener', 'Just a building', 'Pic1', 0, '10.355465', '123.910088', 'Building', 1, 'amenity'),
+(18, 1, 0, 'CAFA', 'Just a building', 'Pic1', 0, '10.352515', '123.910585', 'Building', 1, 'amenity'),
+(19, 1, 0, 'Arnoldus Science', 'Just a building', 'Pic1', 0, '10.353924', '123.91218', 'Building', 1, 'amenity'),
+(20, 1, 0, 'Michael Richartz', 'Just a building', 'Pic1', 0, '10.353195', '123.909937', 'Building', 1, 'amenity'),
+(21, 1, 0, 'Philip Van Engelen', 'Just a building', 'Pic1', 0, '10.354892', '123.910859', 'Building', 1, 'amenity'),
+(22, 1, 0, 'Science and Mathematics', 'Just a building', 'Pic1', 0, '10.354892', '123.910859', 'Building', 1, 'amenity'),
+(23, 1, 0, 'USC Church', 'Just a building', 'Pic1', 0, '10.354892', '123.910859', 'Building', 1, 'amenity'),
+(24, 1, 0, 'Joseph Baumgartner - Learning Resource Center', 'Just a building', 'Pic1', 0, '10.354124', '123.909342', 'Building', 1, 'amenity'),
+(25, 1, 16, 'LB442', 'This is a classroom', 'Pic1', 1, '10.351825', '123.912779', 'Classroom', 1, 'amenity'),
+(26, 1, 16, 'LB443', 'This is a classroom', 'Pic1', 1, '10.351776', '123.912986', 'Classroom', 1, 'amenity'),
+(27, 1, 16, 'LB444', 'This is a classroom', 'Pic1', 1, '10.351718', '123.913298', 'Classroom', 1, 'amenity'),
+(28, 1, 16, 'LB445', 'This is a classroom', 'Pic1', 1, '10.351884', '123.913188', 'Classroom', 1, 'amenity'),
+(29, 1, 16, 'LB446', 'This is a classroom', 'Pic1', 1, '10.351916', '123.913082', 'Classroom', 1, 'amenity'),
+(30, 1, 21, 'PE11', 'This is a classroom', 'Pic1', 1, '10.355173', '123.910995', 'Classroom', 1, 'amenity'),
+(31, 1, 21, 'PE12', 'This is a classroom', 'Pic1', 1, '10.355117', '123.910964', 'Classroom', 1, 'amenity'),
+(32, 1, 21, 'PE13', 'This is a classroom', 'Pic1', 1, '10.355051', '123.910916', 'Classroom', 1, 'amenity'),
+(33, 1, 21, 'PE14', 'This is a classroom', 'Pic1', 1, '10.354967', '123.910854', 'Classroom', 1, 'amenity'),
+(34, 1, 21, 'PE15', 'This is a classroom', 'Pic1', 1, '10.354836', '123.910723', 'Classroom', 1, 'amenity'),
+(35, 1, 17, 'RH411', 'This is a classroom', 'Pic1', 1, '10.355485', '123.910154', 'Classroom', 1, 'amenity'),
+(36, 1, 17, 'RH412', 'This is a classroom', 'Pic1', 1, '10.355492', '123.910078', 'Classroom', 1, 'amenity'),
+(37, 1, 17, 'RH413', 'This is a classroom', 'Pic1', 1, '10.355496', '123.909998', 'Classroom', 1, 'amenity'),
+(38, 1, 17, 'RH414', 'This is a classroom', 'Pic1', 1, '10.355484', '123.909913', 'Classroom', 1, 'amenity'),
+(39, 1, 17, 'RH415', 'This is a classroom', 'Pic1', 1, '10.355453', '123.909838', 'Classroom', 1, 'amenity');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buildinglevel`
+--
+
+CREATE TABLE IF NOT EXISTS `buildinglevel` (
+  `bl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bldg_id` int(11) NOT NULL,
+  `bldg_levelNum` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`bl_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `buildinglevel`
+--
+
+INSERT INTO `buildinglevel` (`bl_id`, `bldg_id`, `bldg_levelNum`, `type`) VALUES
+(1, 16, 4, 'level'),
+(2, 17, 4, 'level'),
+(3, 18, 3, 'level'),
+(4, 19, 3, 'level'),
+(5, 20, 2, 'level'),
+(6, 21, 5, 'level'),
+(7, 22, 4, 'level'),
+(8, 23, 2, 'level'),
+(9, 24, 4, 'level');
 
 -- --------------------------------------------------------
 
@@ -45,12 +123,21 @@ CREATE TABLE IF NOT EXISTS `building` (
 --
 
 CREATE TABLE IF NOT EXISTS `campus` (
-  `c_id` int(11) NOT NULL,
-  `c_name` int(11) NOT NULL,
-  `c_addr` int(11) NOT NULL,
-  `c_desc` int(11) NOT NULL,
-  `sync` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `c_name` text NOT NULL,
+  `c_addr` text NOT NULL,
+  `c_desc` text NOT NULL,
+  `sync` tinyint(1) NOT NULL DEFAULT '0',
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `campus`
+--
+
+INSERT INTO `campus` (`c_id`, `c_name`, `c_addr`, `c_desc`, `sync`, `type`) VALUES
+(2, 'USC-TC', 'Talamaban, Cebu city', 'Just a campus', 1, 'campus');
 
 -- --------------------------------------------------------
 
@@ -59,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `campus` (
 --
 
 CREATE TABLE IF NOT EXISTS `classroom` (
-`cr_id` int(11) NOT NULL,
+  `cr_id` int(11) NOT NULL AUTO_INCREMENT,
   `c_id` int(11) NOT NULL,
   `b_id` int(11) NOT NULL,
   `cr_name` text NOT NULL,
@@ -70,36 +157,51 @@ CREATE TABLE IF NOT EXISTS `classroom` (
   `cr_longitude` text NOT NULL,
   `cr_catName` text NOT NULL,
   `cr_blevelNum` int(11) NOT NULL,
-  `sync` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `sync` tinyint(1) NOT NULL DEFAULT '0',
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`cr_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `classroom`
 --
 
-INSERT INTO `classroom` (`cr_id`, `c_id`, `b_id`, `cr_name`, `cr_pic`, `cr_sched`, `cr_desc`, `cr_latitude`, `cr_longitude`, `cr_catName`, `cr_blevelNum`, `sync`) VALUES
-(5, 1, 1, 'LB401', 'Pic1', '9:00 AM - 10:30 PM', 'Lecture Room', '10.3232', '10.323232', 'Classroom', 1, 1);
+INSERT INTO `classroom` (`cr_id`, `c_id`, `b_id`, `cr_name`, `cr_pic`, `cr_sched`, `cr_desc`, `cr_latitude`, `cr_longitude`, `cr_catName`, `cr_blevelNum`, `sync`, `type`) VALUES
+(1, 1, 1, 'LB442', 'Pic1', '9:00 AM - 10:30 PM', 'Lecture Room', '10.351825', '123.912779', 'Classroom', 0, 1, 'classroom'),
+(2, 1, 1, 'LB443', 'PIc1', '7:30 - 7:30', 'This is a classroom', '10.351776', '123.912986', 'Classroom', 1, 1, 'classroom'),
+(3, 1, 1, 'LB444', 'PIc1', '7:30 - 7:30', 'This is a classroom', '10.351718', '123.913298', 'Classroom', 1, 1, 'classroom'),
+(4, 1, 1, 'LB445', 'PIc1', '7:30 - 7:30', 'This is a classroom', '10.351884', '123.913188', 'Classroom', 1, 1, 'classroom'),
+(5, 1, 1, 'LB446', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.351916', '123.913082', 'Classroom', 1, 1, 'classroom'),
+(6, 1, 1, 'PE11', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355173', '123.910995', 'Classroom', 1, 1, 'classroom'),
+(7, 1, 1, 'PE12', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355117', '123.910964', 'Classroom', 1, 1, 'classroom'),
+(8, 1, 1, 'PE13', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355051', '123.91091', 'Classroom', 1, 1, 'classroom'),
+(9, 1, 1, 'PE14', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.354967', '123.910854', 'Classroom', 1, 1, 'classroom'),
+(10, 1, 1, 'PE15', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.354836', '123.910723', 'Classroom', 1, 1, 'classroom'),
+(11, 1, 1, 'RH411', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355485', '123.910154', 'Classroom', 1, 1, 'classroom'),
+(12, 1, 1, 'RH412', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355492', '123.910078', 'Classroom', 1, 1, 'classroom'),
+(13, 1, 1, 'RH413', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355496', '123.909998', 'Classroom', 1, 1, 'classroom'),
+(14, 1, 1, 'RH414', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355484', '123.909913', 'Classroom', 1, 1, 'classroom'),
+(15, 1, 1, 'RH415', 'Pic1', '7:30 - 7:30', 'This is a classroom', '10.355453', '123.909838', 'Classroom', 1, 1, 'classroom');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `otheramenities`
+-- Table structure for table `databaseversion`
 --
 
-CREATE TABLE IF NOT EXISTS `otheramenities` (
-`oa_id` int(11) NOT NULL,
-  `c_id` int(11) NOT NULL,
-  `b_id` int(11) NOT NULL,
-  `oa_name` text NOT NULL,
-  `oa_desc` text NOT NULL,
-  `oa_pic` text NOT NULL,
-  `oa_type` text NOT NULL,
-  `oa_BLevelNum` int(11) NOT NULL,
-  `oa_latitude` text NOT NULL,
-  `oa_longitude` text NOT NULL,
-  `oa_catName` int(11) NOT NULL,
-  `sync` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `databaseversion` (
+  `DB_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DB_Version` int(11) DEFAULT NULL,
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`DB_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `databaseversion`
+--
+
+INSERT INTO `databaseversion` (`DB_ID`, `DB_Version`, `type`) VALUES
+(1, 4, 'databaseVersion');
 
 -- --------------------------------------------------------
 
@@ -108,73 +210,41 @@ CREATE TABLE IF NOT EXISTS `otheramenities` (
 --
 
 CREATE TABLE IF NOT EXISTS `roomutility` (
-`ru_id` int(11) NOT NULL,
+  `ru_id` int(11) NOT NULL AUTO_INCREMENT,
   `cr_id` int(11) NOT NULL,
-  `ru_day` int(11) NOT NULL,
-  `ru_time` time NOT NULL,
-  `ru_teacher_name` text NOT NULL,
-  `ru_subj_code` text NOT NULL,
-  `sync` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ru_monday` text NOT NULL,
+  `ru_tuesday` text NOT NULL,
+  `ru_wednesday` text NOT NULL,
+  `ru_thursday` text NOT NULL,
+  `ru_friday` text NOT NULL,
+  `ru_saturday` text NOT NULL,
+  `ru_sunday` text NOT NULL,
+  `sync` int(11) NOT NULL DEFAULT '0',
+  `type` varchar(100) NOT NULL DEFAULT 'utility',
+  PRIMARY KEY (`ru_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `roomutility`
 --
 
---
--- Indexes for table `building`
---
-ALTER TABLE `building`
- ADD PRIMARY KEY (`b_id`);
+INSERT INTO `roomutility` (`ru_id`, `cr_id`, `ru_monday`, `ru_tuesday`, `ru_wednesday`, `ru_thursday`, `ru_friday`, `ru_saturday`, `ru_sunday`, `sync`, `type`) VALUES
+(1, 25, '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', '[\n	{\n		"time" : "7:30AM - 8:30AM",\n		"teacher" : "Ms. A",\n		"subCode" : "IT11"\n	},\n	{\n		"time" : "9:30AM - 10:30AM",\n		"teacher" : "Ms. B",\n		"subCode" : "IT12"\n	},\n	{\n		"time" : "11:30AM - 12:30PM",\n		"teacher" : "Ms. C",\n		"subCode" : "IT13"\n	},\n	{\n		"time" : "2:00PM - 5:00PM",\n		"teacher" : "Ms. D",\n		"subCode" : "IT14"\n	}\n]', 1, 'utility'),
+(2, 26, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(3, 27, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(4, 28, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(5, 29, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(6, 30, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(7, 31, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(8, 32, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(9, 33, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(10, 34, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(11, 35, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(12, 36, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(13, 37, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(14, 38, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility'),
+(15, 39, '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', '[\r\n	{\r\n		"time" : "7:30AM - 8:30AM",\r\n		"teacher" : "Ms. A",\r\n		"subCode" : "IT11"\r\n	},\r\n	{\r\n		"time" : "9:30AM - 10:30AM",\r\n		"teacher" : "Ms. B",\r\n		"subCode" : "IT12"\r\n	},\r\n	{\r\n		"time" : "11:30AM - 12:30PM",\r\n		"teacher" : "Ms. C",\r\n		"subCode" : "IT13"\r\n	},\r\n	{\r\n		"time" : "2:00PM - 5:00PM",\r\n		"teacher" : "Ms. D",\r\n		"subCode" : "IT14"\r\n	}\r\n]', 1, 'utility');
 
---
--- Indexes for table `campus`
---
-ALTER TABLE `campus`
- ADD PRIMARY KEY (`c_id`);
-
---
--- Indexes for table `classroom`
---
-ALTER TABLE `classroom`
- ADD PRIMARY KEY (`cr_id`);
-
---
--- Indexes for table `otheramenities`
---
-ALTER TABLE `otheramenities`
- ADD PRIMARY KEY (`oa_id`);
-
---
--- Indexes for table `roomutility`
---
-ALTER TABLE `roomutility`
- ADD PRIMARY KEY (`ru_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `building`
---
-ALTER TABLE `building`
-MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `classroom`
---
-ALTER TABLE `classroom`
-MODIFY `cr_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `otheramenities`
---
-ALTER TABLE `otheramenities`
-MODIFY `oa_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `roomutility`
---
-ALTER TABLE `roomutility`
-MODIFY `ru_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

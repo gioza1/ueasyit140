@@ -19,6 +19,11 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -33,6 +38,7 @@ import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
@@ -91,7 +97,7 @@ public class Map extends Activity implements MapEventsReceiver {
 		MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 		DB = new Database(this);
 		
-		String table = "Classroom";
+		String table = "Building";
 		b = getIntent().getExtras();
 		if(b!=null)
 		{
@@ -111,10 +117,11 @@ public class Map extends Activity implements MapEventsReceiver {
 				oi.setIcon(getResources()
 						.getDrawable(R.drawable.amenity_marker));
 				oi.setTitle(cn.getName());
+				InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble, mapView);
+				oi.setInfoWindow(infoWindow);
 				anotherOverlayItemArray.add(oi);
 			}
-
-
+	
 		mapView.getOverlays().addAll(anotherOverlayItemArray);
 		mapView.getOverlays().add(0, mapEventsOverlay);
 		// ---
@@ -122,6 +129,8 @@ public class Map extends Activity implements MapEventsReceiver {
 		// Add Scale Bar
 		ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(this);
 		mapView.getOverlays().add(myScaleBarOverlay);
+		
+//		InfoWindow.getOpenedInfoWindowsOn(mapView)
 	}
 
 	// protected void addOverlays() {
@@ -178,13 +187,14 @@ public class Map extends Activity implements MapEventsReceiver {
 			startActivity(new Intent(this, Category.class));
 			break;
 		case R.id.action_map:
-			Intent i = new Intent(this,Map.class);
-			Bundle c = getIntent().getExtras();
-			String table = "Classroom";
-			if(c!=null)
-				table = c.getString("tableName");
-			i.putExtra("tableName", table);
-			startActivity(i);
+			Toast.makeText(this, "You're already viewing me", Toast.LENGTH_SHORT).show();
+//			Intent i = new Intent(this,Map.class);
+//			Bundle c = getIntent().getExtras();
+//			String table = "Classroom";
+//			if(c!=null)
+//				table = c.getString("tableName");
+//			i.putExtra("tableName", table);
+//			startActivity(i);
 			
 			break;
 		case android.R.id.home:
@@ -207,6 +217,56 @@ public class Map extends Activity implements MapEventsReceiver {
 		InfoWindow.closeAllInfoWindowsOn(mapView);
 		return true;
 	}
+	
+	private class MyInfoWindow extends InfoWindow{
+
+
+		   public MyInfoWindow(int layoutResId, MapView mapView) {
+//			  this.layoutResId = layoutResId;
+//			  mView = mapView;
+//			  amenityName = name;
+		      super(layoutResId, mapView); 
+		   }
+		   
+
+
+
+
+
+		   public void onClose() {
+		   }
+
+		   public void onOpen(Object marker) {
+		      LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
+		      Marker current = (Marker) marker;
+		      for(int i=0; i<mapView.getOverlays().size(); ++i){
+		    	  Overlay o = mapView.getOverlays().get(i);
+		    	  if(o instanceof Marker){
+		    	  Marker m = (Marker) o;;
+		    	  if(!m.getTitle().equals(current.getTitle()))
+		    	  m.closeInfoWindow();
+		    	  }
+		    	  }
+		    final String title = current.getTitle();
+		      TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
+//		      TextView txtDescription = (TextView) mView.findViewById(R.id.bubble_description);
+//		      TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
+
+		      txtTitle.setText(title);
+//		      txtDescription.setText("Click here to view details!");
+//		      txtSubdescription.setText("You can also edit the subdescription");
+		      layout.setOnClickListener(new OnClickListener() {
+		         public void onClick(View v) {
+		            // Override Marker's onClick behaviour here
+		        	 Intent i = new Intent(v.getContext(),AmenityBuilding.class);
+		        	 i.putExtra("AmenityName",title);
+		        	 startActivity(i);
+		        	 
+		         }
+		      }); 
+		   } 
+		}
+	
 
 	// class ShadeAreaOverlay extends SafeDrawOverlay {
 	//

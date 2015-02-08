@@ -42,5 +42,10 @@
     <string name="title_activity_search">Search</string>
     <string name="title_activity_category">Category</string>
         <string name="title_activity_other_amenity">Other Amenity</string>
+        
+        <!--  buildilng information static -->
+        <string name="basic_info">Basic Information</string>
+        <string name="building_levels">Building levels</string>
+        <string name="level_number"> 4</string>
 
 </resources>
