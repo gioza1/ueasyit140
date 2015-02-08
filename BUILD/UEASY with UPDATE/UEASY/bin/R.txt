@@ -295,6 +295,7 @@ int id action_search 0x7f05006d
 int id actionbar_search 0x7f050070
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
+int id amenity_name 0x7f05006a
 int id appDescription 0x7f050059
 int id appTitle 0x7f050050
 int id beginning 0x7f050011
@@ -352,7 +353,6 @@ int id never 0x7f050009
 int id none 0x7f050010
 int id normal 0x7f050000
 int id pager 0x7f05003c
-int id product_name 0x7f05006a
 int id progress_circular 0x7f050018
 int id progress_horizontal 0x7f050019
 int id radio 0x7f05002f

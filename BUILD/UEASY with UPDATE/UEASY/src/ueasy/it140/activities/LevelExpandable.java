@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ueasy.it140.R;
+import ueasy.it140.database.Database;
+import ueasy.it140.adapters.ExpandableListAdapter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
@@ -13,12 +16,9 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
-import ueasy.it140.R;
-import ueasy.it140.adapters.*;
 
 public class LevelExpandable extends Activity {
 
@@ -27,20 +27,23 @@ public class LevelExpandable extends Activity {
 	List<String> listDataHeader;
 	HashMap<String, List<String>> listDataChild;
 	Bundle b;
+	String bldgName;
+	Database DB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.level_main);
 		b = getIntent().getExtras();
+		bldgName = b.getString("BuildingName", "NULL");
 		ActionBar ab = getActionBar();
-		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"
-				+ b.getString("BuildingName", "NULL") + " </font>"));
+		ab.setTitle(Html.fromHtml("<font color='#ffffff'>" + bldgName
+				+ " </font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		ab.setDisplayHomeAsUpEnabled(true);
 		// get the
 		expListView = (ExpandableListView) findViewById(R.id.level_expand);
-
+		DB = new Database(this);
 		// preparing list data
 		prepareListData();
 
@@ -101,40 +104,58 @@ public class LevelExpandable extends Activity {
 		listDataHeader = new ArrayList<String>();
 		listDataChild = new HashMap<String, List<String>>();
 
-		// Adding child data
-		listDataHeader.add("Level 3");
-		listDataHeader.add("Level 2");
-		listDataHeader.add("Level 1");
+		int totalLevels = DB.getNumBldgLevel(bldgName);
+		listDataHeader = DB.getAllAmenityInBldgLevel("Philip Van Engelen", 1);
+		Toast.makeText(getBaseContext(),
+				Integer.toString(listDataHeader.size()), Toast.LENGTH_SHORT)
+				.show();
 
-		// Adding child data
-		List<String> level3 = new ArrayList<String>();
-		level3.add("LB 301");
-		level3.add("LB 302");
-		level3.add("LB 303");
-		level3.add("LB 304");
-		level3.add("LB 305");
-		level3.add("LB 306");
-		level3.add("LB 307");
-
-		List<String> level_2 = new ArrayList<String>();
-		level_2.add("LB 201");
-		level_2.add("LB 202");
-		level_2.add("LB 203");
-		level_2.add("LB 204");
-		level_2.add("LB 205");
-		level_2.add("LB 206");
-
-		List<String> level_1 = new ArrayList<String>();
-		level_1.add("LB 101");
-		level_1.add("LB 102");
-		level_1.add("LB 103");
-		level_1.add("LB 104");
-		level_1.add("LB 105");
-
-		listDataChild.put(listDataHeader.get(0), level3); // Header, Child data
-		listDataChild.put(listDataHeader.get(1), level_2);
-		listDataChild.put(listDataHeader.get(2), level_1);
+		for (int i = 0; i > totalLevels; i++) {
+			// Toast.makeText(getBaseContext(), Integer.toString(i),
+			// Toast.LENGTH_SHORT).show();
+			//
+			for (String k : DB.getAllAmenityInBldgLevel(bldgName, i)) {
+				Toast.makeText(getBaseContext(), k, Toast.LENGTH_SHORT).show();
+			}
+			listDataHeader.add("Level " + (i + 1));
+			List<String> level = new ArrayList<String>();
+			level.addAll(DB.getAllAmenityInBldgLevel(bldgName, i));
+			listDataChild.put("Level " + (i + 1), level);
+		}
+		// // // Adding child data
+		// listDataHeader.add("Level 3");
+		// listDataHeader.add("Level 2");
+		// listDataHeader.add("Level 1");
+		//
+		// // Adding child data
+		// List<String> level3 = new ArrayList<String>();
+		// level3.add("LB 301");
+		// level3.add("LB 302");
+		// level3.add("LB 303");
+		// level3.add("LB 304");
+		// level3.add("LB 305");
+		// level3.add("LB 306");
+		// level3.add("LB 307");
+		//
+		// List<String> level_2 = new ArrayList<String>();
+		// level_2.add("LB 201");
+		// level_2.add("LB 202");
+		// level_2.add("LB 203");
+		// level_2.add("LB 204");
+		// level_2.add("LB 205");
+		// level_2.add("LB 206");
+		//
+		// List<String> level_1 = new ArrayList<String>();
+		// level_1.add("LB 101");
+		// level_1.add("LB 102");
+		// level_1.add("LB 103");
+		// level_1.add("LB 104");
+		// level_1.add("LB 105");
+		//
+		// listDataChild.put(listDataHeader.get(0), level3); // Header, Child
+		// data
+		// listDataChild.put(listDataHeader.get(1), level_2);
+		// listDataChild.put(listDataHeader.get(2), level_1);
 
 	}
-
 }

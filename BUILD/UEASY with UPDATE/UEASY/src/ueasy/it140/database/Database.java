@@ -1,5 +1,6 @@
 package ueasy.it140.database;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import org.osmdroid.util.GeoPoint;
 import ueasy.it140.activities.DatabaseObject;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +28,7 @@ public class Database extends SQLiteOpenHelper {
 
 	public static String DB_PATH = "/data/data/ueasy.it140/databases/";
 	public static final String DB_Name = "UEASY.db";
+	public String DB_OffcialName = "UEASY.db";
 
 	public static final String KEY_ROWID = "_id";
 	/* Table names */
@@ -407,6 +410,54 @@ public class Database extends SQLiteOpenHelper {
 
 	}
 
+	public List<String> getAllAmenityInBldgLevel(String bName, int bLevel) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		List<String> retVal = new ArrayList<String>();
+
+		// Retrieving all names of the Amenities
+		Cursor cursor = db.rawQuery(
+				"SELECT amenity_id FROM Amenities WHERE amenity_name = '"
+						+ bName + "'", null);
+		if (cursor != null)
+			cursor.moveToFirst();
+		int bId = cursor.getInt((cursor.getColumnIndexOrThrow("amenity_id")));
+
+		String rQ = "SELECT amenity_name FROM Amenities WHERE amenity_bldgID = '"
+				+ bId + "' AND amenity_bldgLevel = '" + bLevel + "'";
+		Cursor cursor3 = db.rawQuery(rQ, null);
+
+		// Adding all OtherAmenity names to the ArrayList
+		if (cursor3 != null)
+			cursor3.moveToFirst();
+		while (cursor3.moveToNext()) {
+			int ndx2 = cursor3.getColumnIndex(Amenities_name);
+			retVal.add(cursor3.getString(ndx2));
+		}
+
+		return retVal;
+	}
+
+	public int getNumBldgLevel(String bName) {
+		int num = 0;
+		SQLiteDatabase db = this.getWritableDatabase();
+		// Retrieving all names of the Amenities
+		Cursor cursor = db.rawQuery(
+				"SELECT amenity_id FROM Amenities WHERE amenity_name = '"
+						+ bName + "'", null);
+		if (cursor != null)
+			cursor.moveToFirst();
+		int bId = cursor.getInt((cursor.getColumnIndexOrThrow("amenity_id")));
+		String rQ = "SELECT building_levelNum FROM BuildingLevel WHERE building_id = "
+				+ bId;
+		// String[] columns3 = { Amenities_name };
+		Cursor cursor3 = db.rawQuery(rQ, null);
+		if (cursor3 != null)
+			cursor3.moveToFirst();
+		num = cursor3.getInt((cursor3
+				.getColumnIndexOrThrow("building_levelNum")));
+		return num;
+	}
+
 	public void insertPoints() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -763,6 +814,13 @@ public class Database extends SQLiteOpenHelper {
 		}
 
 		return version;
+	}
+
+	/*-----Check if DB exist-----------*/
+
+	public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
+		File dbFile = context.getDatabasePath(dbName);
+		return dbFile.exists();
 	}
 
 }

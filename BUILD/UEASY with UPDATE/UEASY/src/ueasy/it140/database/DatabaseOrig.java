@@ -20,7 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-public class Database extends SQLiteOpenHelper {
+public class DatabaseOrig extends SQLiteOpenHelper {
 
 	public static String DB_PATH = "/data/data/ueasy.it140/databases/";
 	public static final String DB_Name = "UEASY.db";
@@ -78,7 +78,7 @@ public class Database extends SQLiteOpenHelper {
 	private String sql8;
 	private Context context;
 
-	public Database(Context context) {
+	public DatabaseOrig(Context context) {
 		super(context, DB_Name, null, superParam);
 		this.context = context;
 		// Message.message(context, "constructor is called");

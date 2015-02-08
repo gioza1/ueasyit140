@@ -25,8 +25,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Search extends Activity {
-	
+public class SearchOrig extends Activity {
+
 	Database DB;
 	List<String> amenities;
 	// List view
@@ -51,34 +51,32 @@ public class Search extends Activity {
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 
 		DB = new Database(this);
-		
+
 		// Listview Data
 		amenities = new ArrayList<String>();
 
-		amenities =  DB.getAllAmenityName();
-		
+		amenities = DB.getAllAmenityName();
+
 		lv = (ListView) findViewById(R.id.list_view);
 		inputSearch = (EditText) findViewById(R.id.inputSearch);
 
 		// Adding items to listview
 		adapter = new ArrayAdapter<String>(this, R.layout.search_item,
-				R.id.product_name, amenities);
-
+				R.id.amenity_name, amenities);
 
 		lv.setAdapter(adapter);
 		lv.setVisibility(View.INVISIBLE);
-		
-		lv.setOnItemClickListener(new OnItemClickListener()
-		{
-		    @Override 
-		    public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-		    { 
 
-		 	   String item = (String) adapter.getItem(position);
-				 Intent i = new Intent(getBaseContext(),AmenityBuilding.class);
-		    	 i.putExtra("AmenityName",item);
-		    	 startActivity(i);
-		    }
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+
+				String item = (String) adapter.getItem(position);
+				Intent i = new Intent(getBaseContext(), AmenityBuilding.class);
+				i.putExtra("AmenityName", item);
+				startActivity(i);
+			}
 		});
 		/**
 		 * Enabling Search Filter
@@ -91,16 +89,16 @@ public class Search extends Activity {
 				// When user changed the Text
 				if (cs.length() >= 3) {
 					lv.setVisibility(View.VISIBLE);
-//					for(String p: amenities){
-//						if(p.contains(cs))
-					Search.this.adapter.getFilter().filter(cs);
-//					}
+					// for(String p: amenities){
+					// if(p.contains(cs))
+					SearchOrig.this.adapter.getFilter().filter(cs);
+					// }
 				}
-				
+
 				if (cs.length() < 3) {
 					lv.setVisibility(View.INVISIBLE);
 				}
-				
+
 			}
 
 			@Override
@@ -116,9 +114,7 @@ public class Search extends Activity {
 
 			}
 		});
-		
-		
+
 	}
 
-	
 }
