@@ -1,0 +1,39 @@
+BUNZEL
+Latitude - Longitude:
+10.352122,123.913156
+
+ROBERT HOEPNER
+Latitude - Longitude:
+10.355465,123.910088
+
+CAFA
+Latitude - Longitude:
+10.352515,123.910585
+
+ARNOLDUS SCIENCE
+Latitude - Longitude:
+10.353924,123.91218
+
+MICHAEL RICHARTZ
+Latitude - Longitude:
+10.353195,123.909937
+
+USC AS
+Latitude - Longitude:
+10.354892,123.910859
+
+ROBERT HOEPPENER
+Latitude - Longitude:
+10.35548,123.91012
+
+USC CHAPEL
+Latitude - Longitude:
+10.352942,123.911627
+
+LEARNING RESOURCE CENTER
+Latitude - Longitude:
+10.354124,123.909342
+
+SCIENCE AND MATHEMATICS
+Latitude - Longitude:
+10.354256, 123.911472
