@@ -1,6 +1,5 @@
 package ueasy.it140.database;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,23 +8,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.util.GeoPoint;
 
 import ueasy.it140.activities.DatabaseObject;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Database extends SQLiteOpenHelper {
 
 	public static String DB_PATH = "/data/data/ueasy.it140/databases/";
 	public static final String DB_Name = "UEASY.db";
-	public String DB_OffcialName = "UEASY.db";
 
+	public static final String KEY_ROWID = "_id";
 	/* Table names */
 	public static final String Table_Campus = "Campus";
 	public static final String Table_BuildingLevel = "BuildingLevel";
@@ -69,6 +71,8 @@ public class Database extends SQLiteOpenHelper {
 	/* DatabaseVersion Variables */
 	public static final String DB_ID = "db_id";
 	public static final String DB_Version = "db_version";
+
+	private static final String TAG = "Database";
 
 	public static int superParam = 1;
 	int oldVersion;
@@ -124,7 +128,7 @@ public class Database extends SQLiteOpenHelper {
 
 		// Inserting DB Version
 		ContentValues values = new ContentValues();
-		values.put(DB_Version, 0);
+		values.put(DB_Version, 1);
 		db.insert(Table_DB, null, values);
 
 		/*--------A Test table-----------*/
@@ -367,6 +371,42 @@ public class Database extends SQLiteOpenHelper {
 		return retVal;
 	}
 
+	public Cursor getAllAmenityNameCursor() {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(
+				"SELECT amenity_id _id, amenity_name FROM Amenities", null);
+		// Retrieving all names of the Amenities
+
+		return cursor;
+	}
+
+	public Cursor getAmenityNameCursor(String inputText) throws SQLException {
+		Log.w(TAG, inputText);
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor mCursor = null;
+		if (inputText == null || inputText.length() == 0) {
+			mCursor = db.rawQuery(
+					"SELECT amenity_id _id, amenity_name FROM Amenities", null);
+			// mCursor = db.query(Table_Amenities, columns3, null, null, null,
+			// null, null);
+
+		} else {
+			// mCursor = db.query(Table_Amenities, columns3, Amenities_name
+			// + " like '%" + inputText + "%'", null, null, null, null,
+			// null);
+			mCursor = db.rawQuery(
+					"SELECT amenity_id _id, amenity_name FROM Amenities WHERE amenity_name LIKE '%"
+							+ inputText + "%'", null);
+		}
+		if (mCursor != null) {
+			mCursor.moveToFirst();
+		}
+		return mCursor;
+
+	}
+
 	public void insertPoints() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -475,10 +515,6 @@ public class Database extends SQLiteOpenHelper {
 		db.insert("Geopoints", null, values);
 
 	}
-	
-	
-	
-	/*--------------------Insert----------------------------*/
 
 	public long inserToCampus(int campus_id, String c_name, String c_addr,
 			String c_desc) {
@@ -660,10 +696,42 @@ public class Database extends SQLiteOpenHelper {
 		return usersList;
 	}
 
-		
-	
-/*-----------------------Getting an Amenity ID------------------*/
-	
+	/*
+	 * 
+	 * public ArrayList<HashMap<String, String>> getAllOA(String catName) {
+	 * ArrayList<HashMap<String, String>> oaList; oaList = new
+	 * ArrayList<HashMap<String, String>>(); String selectQuery =
+	 * "SELECT  * FROM "+Table_OtherAmenities+" where oa_catName="+catName;
+	 * SQLiteDatabase database = this.getWritableDatabase(); Cursor cursor =
+	 * database.rawQuery(selectQuery, null); if (cursor.moveToFirst()) { do {
+	 * HashMap<String, String> map = new HashMap<String, String>();
+	 * 
+	 * int ndx1 = cursor.getColumnIndex(OtherAmenities_ID); int ndx2 =
+	 * cursor.getColumnIndex(Campus_ID); int ndx3 =
+	 * cursor.getColumnIndex(Building_ID); int ndx4 =
+	 * cursor.getColumnIndex(OtherAmenities_name); int ndx5 =
+	 * cursor.getColumnIndex(OtherAmenities_desc); int ndx6 =
+	 * cursor.getColumnIndex(OtherAmenities_pic); int ndx7 =
+	 * cursor.getColumnIndex(OtherAmenities_latitude); int ndx8 =
+	 * cursor.getColumnIndex(OtherAmenities_longitude); int ndx9 =
+	 * cursor.getColumnIndex(OtherAmenities_catName); int ndx10 =
+	 * cursor.getColumnIndex(OtherAmenities_bLevel);
+	 * 
+	 * 
+	 * map.put(OtherAmenities_ID, cursor.getString(ndx1)); map.put(Campus_ID,
+	 * cursor.getString(ndx2)); map.put(Building_ID, cursor.getString(ndx3));
+	 * map.put(OtherAmenities_name, cursor.getString(ndx4));
+	 * map.put(OtherAmenities_desc, cursor.getString(ndx5));
+	 * map.put(OtherAmenities_pic, cursor.getString(ndx6));
+	 * map.put(OtherAmenities_latitude, cursor.getString(ndx7));
+	 * map.put(OtherAmenities_longitude, cursor.getString(ndx8));
+	 * map.put(OtherAmenities_catName, cursor.getString(ndx9));
+	 * map.put(OtherAmenities_bLevel, cursor.getString(ndx10));
+	 * 
+	 * oaList.add(map); } while (cursor.moveToNext()); } database.close();
+	 * return oaList; }
+	 */
+
 	public int getID(int id, String table, String columnID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -671,15 +739,15 @@ public class Database extends SQLiteOpenHelper {
 		String[] whereArgs = { "" + id };
 		Cursor cursor = db.query(table, columns, columnID + "=?", whereArgs,
 				null, null, null);
+
 		cursor.moveToNext();
+		// int ndx1 = cursor.getColumnIndex(this.id);
 		Toast.makeText(context, "Cursor count: " + cursor.getCount(),
 				Toast.LENGTH_SHORT).show();
+		// return Integer.parseInt(cursor.getString(ndx1));
 		return cursor.getCount();
 	}
-	
-	
-	/*----------Get DB Version--------------------*/
-	
+
 	public int DBVersion() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		int version = 0;
@@ -691,16 +759,10 @@ public class Database extends SQLiteOpenHelper {
 		while (cursor.moveToNext()) {
 			int ndx1 = cursor.getColumnIndex(DB_Version);
 			version = cursor.getInt(ndx1);
+
 		}
 
 		return version;
 	}
-	
-	
-	/*-----Check if DB exist-----------*/
 
-	public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
-	    File dbFile = context.getDatabasePath(dbName);
-	    return dbFile.exists();
-	}
 }
