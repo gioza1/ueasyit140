@@ -339,6 +339,7 @@ public class Database extends SQLiteOpenHelper {
 
 		InputStream myInput = context.getAssets().open(DB_Name);
 		String outFileName = DB_PATH + DB_Name;
+		// String outFileName = "/data/data/ueasy.it140/databases/" + DB_Name;
 		OutputStream myOutput = new FileOutputStream(outFileName);
 
 		byte[] buffer = new byte[1024];
@@ -569,7 +570,11 @@ public class Database extends SQLiteOpenHelper {
 
 	public long inserToCampus(int campus_id, String c_name, String c_addr,
 			String c_desc) {
-		SQLiteDatabase db = this.getWritableDatabase();
+//		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
+		if (db.isOpen()){
+		    db.close();
+		}
 		long retVal = 0;
 		ContentValues values = new ContentValues();
 		values.put(Campus_ID, campus_id);
@@ -597,7 +602,11 @@ public class Database extends SQLiteOpenHelper {
 			int bldg_id, int a_bLevel, String a_name, String a_desc,
 			String a_pic, double a_la, double a_longi) {
 		long retVal = 0;
-		SQLiteDatabase database = this.getWritableDatabase();
+//		SQLiteDatabase database = this.getWritableDatabase();
+		SQLiteDatabase database = this.getReadableDatabase();
+		if (database.isOpen()){
+			database.close();
+		}
 		ContentValues values = new ContentValues();
 		values.put(Amenities_ID, a_id);
 		values.put(Campus_ID, campus_id);
@@ -627,7 +636,11 @@ public class Database extends SQLiteOpenHelper {
 
 	public long inserToBLevel(int bl_id, int bl_bID, int bl_bNum) {
 		long retVal = 0;
-		SQLiteDatabase db = this.getWritableDatabase();
+//		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
+		if (db.isOpen()){
+		    db.close();
+		}
 		ContentValues values = new ContentValues();
 		values.put(BuildingLevel_ID, bl_id);
 		values.put(BuildingLevel_BuildingID, bl_bID);
@@ -635,8 +648,8 @@ public class Database extends SQLiteOpenHelper {
 
 		if (getID(bl_id, Table_BuildingLevel, BuildingLevel_ID) > 0) {
 			String[] whereArgs = { "" + bl_id };
-			retVal = db.update(Table_BuildingLevel, values, BuildingLevel_ID
-					+ "=?", whereArgs);
+			retVal = db.update(Table_BuildingLevel, values,
+					BuildingLevel_ID + "=?", whereArgs);
 		}
 
 		else {
@@ -653,7 +666,11 @@ public class Database extends SQLiteOpenHelper {
 			String ru_tue, String ru_wed, String ru_thu, String ru_fri,
 			String ru_sat, String ru_sun) {
 		long retVal = 0;
-		SQLiteDatabase db = this.getWritableDatabase();
+//		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
+		if (db.isOpen()){
+		    db.close();
+		}
 		ContentValues values = new ContentValues();
 		values.put(RoomUtility_ID, ru_id);
 		values.put(RoomUtility_ClassroomID, cr_id);
@@ -667,8 +684,8 @@ public class Database extends SQLiteOpenHelper {
 
 		if (getID(ru_id, Table_RoomUtility, RoomUtility_ID) > 0) {
 			String[] whereArgs = { "" + ru_id };
-			retVal = db.update(Table_RoomUtility, values,
-					RoomUtility_ID + "=?", whereArgs);
+			retVal = db.update(Table_RoomUtility, values, RoomUtility_ID
+					+ "=?", whereArgs);
 		}
 
 		else {
@@ -683,7 +700,11 @@ public class Database extends SQLiteOpenHelper {
 
 	public long inserToDatabase(int db_id, int db_version) {
 		long retVal = 0;
-		SQLiteDatabase db = this.getWritableDatabase();
+//		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
+		if (db.isOpen()){
+		    db.close();
+		}
 		ContentValues values = new ContentValues();
 		values.put(DB_ID, db_id);
 		values.put(DB_Version, db_version);

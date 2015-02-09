@@ -11,8 +11,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,6 +70,30 @@ public class AmenityBuilding extends Activity {
 		Intent in = new Intent(this, LevelExpandable.class);
 		in.putExtra("BuildingName", amenityName);
 		startActivity(in);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.specific_category, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.showInMap:
+			Intent i = new Intent(this, Map.class);
+			i.putExtra("AmenityName", amenityName);
+			// i.putExtra
+			startActivity(i);
+			break;
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }
