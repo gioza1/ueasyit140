@@ -54,6 +54,15 @@ public class Update extends ActionBarActivity {
 	
 	//DatabaseVersion Variables
 	int db_version;		int db_id;
+	
+	//Faqs Variables
+	int f_id;	 String f_ques; 
+	String f_ans;
+	
+	//About Variables
+	int ab_id;			String ab_name; 
+	String ab_version; 	String ab_desc; 
+	String ab_email; 	String ab_footer;
 			
 	String type;
 	
@@ -107,7 +116,7 @@ public class Update extends ActionBarActivity {
 		// Show ProgressBar
 		prgDialog.show();
 		// Make Http call to getusers.php
-		client.post("http://192.168.254.103/ueasy/getClassroom.php", params, new AsyncHttpResponseHandler() {
+		client.post("http://192.168.56.1/ueasy/getClassroom.php", params, new AsyncHttpResponseHandler() {
 				@Override
 				public void onSuccess(String response) {
 					// Hide ProgressBar
@@ -188,6 +197,19 @@ public class Update extends ActionBarActivity {
 						obj.get("ru_sunday");
 					}
 					
+					else if(type.equals("faqs")) //Getting FAQS Data from Json
+					{
+						obj.get("f_id");			obj.get("f_ques");
+						obj.get("f_ans");		
+					}
+					
+					else if(type.equals("about")) //Getting FAQS Data from Json
+					{
+						obj.get("ab_id");			obj.get("ab_version");
+						obj.get("ab_name");			obj.get("ab_email");
+						obj.get("ab_desc");			obj.get("ab_footer");
+					}
+					
 					else if(type.equals("databaseVersion")) //Getting Campus Data from Json
 					{
 						obj.get("db_id");	obj.get("db_version");
@@ -250,6 +272,26 @@ public class Update extends ActionBarActivity {
 						
 					}
 					
+					else if(type.equals("about"))
+					{
+						ab_id = Integer.parseInt(obj.getString("ab_id").toString());
+						ab_version =  obj.getString("ab_version").toString();
+						ab_email = obj.getString("ab_email").toString();	 	
+						ab_name = obj.getString("ab_name").toString();
+						ab_desc = obj.getString("ab_desc").toString();
+						ab_footer = obj.getString("ab_footer").toString();	 	
+						
+					}
+					
+					else if(type.equals("faqs"))
+					{
+						f_id = Integer.parseInt(obj.getString("f_id").toString());
+						f_ans =  obj.getString("f_ans").toString();
+						f_ques = obj.getString("f_ques").toString();	 	
+						
+					}
+					
+					
 					else if(type.equals("databaseVersion"))
 					{
 						db_id = Integer.parseInt(obj.getString("db_id").toString());
@@ -294,6 +336,20 @@ public class Update extends ActionBarActivity {
 							Toast.makeText(getApplicationContext(), "Naka insert sa Room Utility:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToRoomUtility(ru_id, cr_id, ru_mon, ru_tue, ru_wed, ru_thu, ru_fri, ru_sat, ru_sun);
 							Toast.makeText(getApplicationContext(), "Result  insert Room Utility:  "+ result , Toast.LENGTH_SHORT).show();
+						}
+						
+						else if(type.equals("faqs"))
+						{
+							Toast.makeText(getApplicationContext(), "Naka insert sa Faqs:  ", Toast.LENGTH_SHORT).show();
+							result = controller.inserToFaqs(f_id, f_ques, f_ans);
+							Toast.makeText(getApplicationContext(), "Result  insert Faqs:  "+ result , Toast.LENGTH_SHORT).show();
+						}
+						
+						else if(type.equals("about"))
+						{
+							Toast.makeText(getApplicationContext(), "Naka insert sa About:  ", Toast.LENGTH_SHORT).show();
+							result = controller.inserToAbout(ab_id, ab_name, ab_version, ab_desc, ab_email, ab_footer);
+							Toast.makeText(getApplicationContext(), "Result  insert About:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else if(type.equals("databaseVersion"))
@@ -344,12 +400,7 @@ public class Update extends ActionBarActivity {
 							Toast.makeText(getApplicationContext(), "Map: "+type+" "+obj.get("c_id").toString(), Toast.LENGTH_SHORT).show();
 						}
 						
-						else
-						{
-							map.put("bl_id", obj.get("bl_id").toString());
-							map.put("name", obj.get("bl_id").toString());
-							Toast.makeText(getApplicationContext(), "Map: "+type+" "+obj.get("bl_id").toString(), Toast.LENGTH_SHORT).show();
-						}
+						
 						
 						map.put("status", "1");
 						amenitysynclist.add(map);
@@ -374,7 +425,7 @@ public class Update extends ActionBarActivity {
 		RequestParams params = new RequestParams();
 		params.put("sync", json);
 		// Make Http call to updatesyncsts.php with JSON parameter which has Sync statuses of Users
-		client.post("http://192.168.254.103/ueasy/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
+		client.post("http://192.168.56.1/ueasy/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				Toast.makeText(getApplicationContext(),	"MySQL DB has been informed about Sync activity", Toast.LENGTH_SHORT).show();
@@ -389,9 +440,8 @@ public class Update extends ActionBarActivity {
 	
 	// Reload MainActivity
 	public void reloadActivity() {
-		
 		Success suc = new Success();
-		suc.show(getFragmentManager(), "Confirm");
+		suc.show(getFragmentManager(), "Success");
 		
 	}
 }

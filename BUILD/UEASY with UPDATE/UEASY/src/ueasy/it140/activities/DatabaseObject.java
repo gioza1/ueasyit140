@@ -84,7 +84,7 @@ public class DatabaseObject {
 		public void setBlevels(int _blevels) {
 			this._blevels = _blevels;
 		}
-		public String get_type() {
+		public String getType() {
 			return _type;
 		}
 		public void setType(String _type) {

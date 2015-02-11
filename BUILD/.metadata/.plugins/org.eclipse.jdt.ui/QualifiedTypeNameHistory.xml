@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.graphics.Point"/>
+<fullyQualifiedTypeName name="org.osmdroid.util.GeoPoint"/>
+<fullyQualifiedTypeName name="org.osmdroid.views.MapView"/>
+<fullyQualifiedTypeName name="org.osmdroid.views.MapView.LayoutParams"/>
+<fullyQualifiedTypeName name="org.osmdroid.util.TileSystem"/>
+<fullyQualifiedTypeName name="org.osmdroid.views.Projection"/>
+<fullyQualifiedTypeName name="org.osmdroid.views.MapController"/>
+<fullyQualifiedTypeName name="android.widget.Scroller"/>
+<fullyQualifiedTypeName name="android.view.MotionEvent"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="org.osmdroid.DefaultResourceProxyImpl"/>
+<fullyQualifiedTypeName name="android.util.AttributeSet"/>
+<fullyQualifiedTypeName name="ueasy.it140.activities.BoundedMapView"/>
+<fullyQualifiedTypeName name="org.osmdroid.util.BoundingBoxE6"/>
+</qualifiedTypeNameHistroy>

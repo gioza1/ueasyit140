@@ -1,0 +1,68 @@
+package ueasy.it140.activities;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import ueasy.it140.R;
+import ueasy.it140.database.Database;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.text.Html;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
+public class AmenityBuildingLevel extends Activity {
+
+	Database DB;
+	List<String> amenities;
+	// List view
+	private ListView lv;
+
+	// Listview Adapter
+	ArrayAdapter<String> adapter;
+
+	// Search EditText
+	EditText inputSearch;
+
+	// ArrayList for Listview
+	ArrayList<HashMap<String, String>> productList;
+
+	Bundle b;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.level_main);
+
+		ActionBar ab = getActionBar();
+		ab.setTitle(Html.fromHtml("<font color='#ffffff'>SEARCH </font>"));
+		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
+		int bId=0;
+		int bLevel =0;
+		DB = new Database(this);
+		b = getIntent().getExtras();
+		if(b!=null)
+		{
+		bId = b.getInt("BuildingID");
+		bLevel = b.getInt("BuildingLevel");
+		}
+		// Listview Data
+		amenities = new ArrayList<String>();
+
+		amenities = DB.getAllAmenityInBldgLevel(bId, bLevel);
+
+		lv = (ListView) findViewById(R.id.amenity_list);
+		inputSearch = (EditText) findViewById(R.id.inputSearch);
+		// Adding items to listview
+		adapter = new ArrayAdapter<String>(this, R.layout.search_item,
+				R.id.amenity_name, amenities);
+		set
+	}
+}

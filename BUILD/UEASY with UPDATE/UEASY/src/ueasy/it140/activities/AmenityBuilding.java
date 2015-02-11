@@ -1,24 +1,23 @@
 package ueasy.it140.activities;
 
-import org.json.JSONArray;
-
 import ueasy.it140.R;
 import ueasy.it140.database.Database;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Html;
-import android.view.LayoutInflater;
+import android.text.TextUtils.TruncateAt;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +26,8 @@ public class AmenityBuilding extends Activity {
 	Database DB;
 	Bundle b;
 	String amenityName;
+	Double lon, lat;
+	DatabaseObject amenity = new DatabaseObject();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +36,20 @@ public class AmenityBuilding extends Activity {
 
 		DB = new Database(this);
 		b = getIntent().getExtras();
-		DatabaseObject amenity = new DatabaseObject();
+		// DatabaseObject amenity = new DatabaseObject();
 		amenity = DB.getAmenityInformation(b.getString("AmenityName"));
 		amenityName = b.getString("AmenityName");
-
+		int id = amenity.getID();
+		lon = amenity.getLong();
+		lat = amenity.getLat();
+		Toast.makeText(this, Integer.toString(id), Toast.LENGTH_SHORT).show();
 		ActionBar ab = getActionBar();
 		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"
 				+ b.getString("AmenityName", "NULL") + " </font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		ab.setDisplayHomeAsUpEnabled(true);
 
-		if (amenity.get_type().contains("Building")) {
+		if (amenity.getType().contains("Building")) {
 			setContentView(R.layout.building_info);
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
 			desc.setText(amenity.getInfo());
@@ -53,7 +57,7 @@ public class AmenityBuilding extends Activity {
 			Toast.makeText(this, Integer.toString(amenity.get_blevels()),
 					Toast.LENGTH_SHORT).show();
 			blevels.setText(Integer.toString(amenity.get_blevels()));
-		} else if (amenity.get_type().contains("Classroom")) {
+		} else if (amenity.getType().contains("Classroom")) {
 			setContentView(R.layout.room_info);
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
 			desc.setText(amenity.getInfo());
@@ -67,9 +71,47 @@ public class AmenityBuilding extends Activity {
 	}
 
 	public void selectLevel(View v) {
-		Intent in = new Intent(this, LevelExpandable.class);
-		in.putExtra("BuildingName", amenityName);
-		startActivity(in);
+		// Intent in = new Intent(this, LevelExpandable.class);
+		// in.putExtra("BuildingName", amenityName);
+		// in.putExtra("BuildingID", amenity.getID());
+		// startActivity(in);
+
+		AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+		builderSingle.setTitle("Levels");
+		final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.select_dialog_item);
+
+		int totalLevels = DB.getNumBldgLevel(amenityName);
+
+		for (int i = 1; i <= totalLevels; i++)
+			arrayAdapter.add("Level " + i);
+
+		builderSingle.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+		builderSingle.setAdapter(arrayAdapter,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String strName = arrayAdapter.getItem(which);
+						String level = strName.substring(6, 7);
+						Intent in = new Intent(getBaseContext(),
+								AmenityBuildingLevel.class);
+						in.putExtra("BuildingID", amenity.getID());
+						in.putExtra("BuildingLevel", Integer.parseInt(level));
+						in.putExtra("AmenityName", amenity.getName());
+						startActivity(in);
+
+					}
+				});
+		builderSingle.show();
 	}
 
 	@Override
@@ -86,11 +128,26 @@ public class AmenityBuilding extends Activity {
 		case R.id.showInMap:
 			Intent i = new Intent(this, Map.class);
 			i.putExtra("AmenityName", amenityName);
+			i.putExtra("Latitude", lat);
+			i.putExtra("Longitude", lon);
 			// i.putExtra
 			startActivity(i);
 			break;
+		case R.id.action_about:
+			startActivity(new Intent(this, AboutAndFaqs.class));
+			break;
+		case R.id.action_search:
+			startActivity(new Intent(this, Search.class));
+			break;
+		case R.id.action_category:
+			startActivity(new Intent(this, Category.class));
+			break;
+		case R.id.action_map:
+			startActivity(new Intent(this, Map.class));
+			break;
 		case android.R.id.home:
-			NavUtils.navigateUpFromSameTask(this);
+			// NavUtils.navigateUpFromSameTask(this);
+			finish();
 			break;
 		}
 		return super.onOptionsItemSelected(item);

@@ -3,55 +3,54 @@ package ueasy.it140.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import ueasy.it140.R;
-import ueasy.it140.database.Database;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import org.osmdroid.bonuspack.overlays.InfoWindow;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
+import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.Projection;
-import org.osmdroid.bonuspack.location.POI;
-import org.osmdroid.bonuspack.overlays.FolderOverlay;
-import org.osmdroid.bonuspack.overlays.InfoWindow;
-import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
-import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
-import org.osmdroid.bonuspack.overlays.Marker;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
+
+import ueasy.it140.R;
+import ueasy.it140.activities.RotationGestureDetector.OnRotationGestureListener;
+import ueasy.it140.database.Database;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import android.widget.Scroller;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Map extends Activity implements MapEventsReceiver {
 	ArrayList<Marker> anotherOverlayItemArray;
 	Database DB;
 	Bundle b;
-
+	private RotationGestureDetector mRotationDetector;
 	// ===========================================================
 	// Constants
 	// ===========================================================
 	public static final String TITLE = "Limited scroll area";
-	public static MapView mapView;
+	public static FixedMapView mapView;
+
 	private static final int MENU_LIMIT_SCROLLING_ID = Menu.FIRST;
 
 	private static final BoundingBoxE6 sCentralParkBoundingBox;
@@ -61,11 +60,30 @@ public class Map extends Activity implements MapEventsReceiver {
 	// Fields
 	// ===========================================================
 
-	// private ShadeAreaOverlay mShadeAreaOverlay;
+	private ShadeAreaOverlay mShadeAreaOverlay;
 
 	static {
-		sCentralParkBoundingBox = new BoundingBoxE6(10.35826, 123.91455,
-				10.35105, 123.90402);
+		// $$dE1235413$$eE1235452$$fN0102131$$gN0102103
+		// final int west= 1235413;
+		// final int north = 1235452;
+		// final int east = 102131;
+		// final int south = 102103;
+
+		// North: 10.3600 -
+		// East: 123.9025 +
+		// South: 10.3500
+		// West: 123.9160 -
+
+		// North: 10.3593
+		// west: 123.9032
+		// East:123.9155
+		// South: 10.3511
+		// sCentralParkBoundingBox = new BoundingBoxE6(10.3590, 123.9070,
+		// 10.3500,
+		// 123.9100);
+		sCentralParkBoundingBox = new BoundingBoxE6(10.3590, 123.9068, 10.3500,
+				123.9122);
+
 		sPaint = new SafePaint();
 		sPaint.setColor(Color.argb(50, 255, 0, 0));
 	}
@@ -75,25 +93,48 @@ public class Map extends Activity implements MapEventsReceiver {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_map);
 
+		// North: 10.3600 -
+		// East: 123.9025 +
+		// South: 10.3500
+		// West: 123.9160 -
+		// sCentralParkBoundingBox = new BoundingBoxE6(10.3590, 123.9070,
+		// 10.3500,
+		// 123.9100);
+		// sCentralParkBoundingBox = new BoundingBoxE6(10.3590, 123.9070,
+		// 10.3500,
+		// 123.9100);
+
 		getActionBar().setTitle("UEASY-TC");
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setBackgroundDrawable(
 				new ColorDrawable(Color.parseColor("#048abf")));
-		mapView = new MapView(this, 256);
+		
+		
+		mapView = new FixedMapView(this, 500);
+
 		// constructor
 		mapView.setClickable(true);
-		// mapView.setBuiltInZoomControls(true);
+		mShadeAreaOverlay = new ShadeAreaOverlay(this);
+		mapView.getOverlayManager().add(mShadeAreaOverlay);
 		setContentView(mapView); // displaying the MapView
 
+		// mRotationDetector = new RotationGestureDetector(this);
+
 		mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
-		mapView.setMinZoomLevel(17);
-		// mapView.setMaxZoomLevel(19);
-		mapView.getController().setZoom(17); // set initial zoom-level, depends
-												// on your need
-		mapView.getController().setCenter(new GeoPoint(10.35421, 123.91152));
+		// mapView.setMinZoomLevel(17);
+		// mapView.getController().setZoom(17);
+
+		mShadeAreaOverlay = new ShadeAreaOverlay(this);
+
+		setLimitScrolling(true);
+		// mapView.setScrollableAreaLimit(sCentralParkBoundingBox);
+
+		// mapView.getController().a
+
 		mapView.setUseDataConnection(false);
 		mapView.setMultiTouchControls(true);
-
+		final Scroller mScroller = mapView.getScroller();
+		// mScroller.
 		MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 		DB = new Database(this);
 
@@ -101,21 +142,32 @@ public class Map extends Activity implements MapEventsReceiver {
 		String amenity = "";
 		b = getIntent().getExtras();
 		List<DatabaseObject> K = new ArrayList<DatabaseObject>();
+
 		if (b != null) {
 			if (b.containsKey("AmenityName")) {
 				amenity = b.getString("AmenityName");
 				K.add(DB.getAmenityInformation(amenity));
+				mapView.getController().setCenter(
+						new GeoPoint(b.getDouble("Latitude"), b
+								.getDouble("Longitude")));
 			} else {
 				table = b.getString("tableName", "Building");
 				K = DB.getAllDatabaseObject(table);
+				mapView.getController().animateTo(
+						sCentralParkBoundingBox.getCenter());
 			}
+
+		} else {
+			K = DB.getAllDatabaseObject(table);
+			mapView.getController().animateTo(
+					sCentralParkBoundingBox.getCenter());
 		}
 
 		Marker oi;
-		// DB.getAllDatabaseObject(table);
-		// List<GeoPoint> t = DB.AllAmenity();
+		// K = DB.getAllDatabaseObject(table);
+
 		anotherOverlayItemArray = new ArrayList<Marker>();
-		if (K != null)
+		if (K != null) {
 			// Toast.makeText(this, cn.getName(), Toast.LENGTH_SHORT).show();
 			for (DatabaseObject cn : K) {
 				oi = new Marker(mapView);
@@ -129,7 +181,7 @@ public class Map extends Activity implements MapEventsReceiver {
 				oi.setInfoWindow(infoWindow);
 				anotherOverlayItemArray.add(oi);
 			}
-
+		}
 		mapView.getOverlays().addAll(anotherOverlayItemArray);
 		mapView.getOverlays().add(0, mapEventsOverlay);
 		// ---
@@ -137,44 +189,33 @@ public class Map extends Activity implements MapEventsReceiver {
 		// Add Scale Bar
 		ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(this);
 		mapView.getOverlays().add(myScaleBarOverlay);
+		mapView.getOverlayManager().add(mShadeAreaOverlay);
 
 		// InfoWindow.getOpenedInfoWindowsOn(mapView)
+
 	}
 
-	// protected void addOverlays() {
+	// @Override
+	// public boolean onTouchEvent(MotionEvent event) {
+	// mRotationDetector.onTouchEvent(event);
+	// return super.onTouchEvent(event);
+	// }
 	//
-	//
-	// final Context context = this;
-	//
-	// mShadeAreaOverlay = new ShadeAreaOverlay(context);
-	// mapView.getOverlayManager().add(mShadeAreaOverlay);
-	//
-	// setLimitScrolling(true);
-	// // setHasOptionsMenu(true);
+	// @Override
+	// public void OnRotation(RotationGestureDetector rotationDetector) {
+	// float angle = rotationDetector.getAngle();
+	// Log.d("RotationGestureDetector", "Rotation: " + Float.toString(angle));
 	// }
 
-	// protected void setLimitScrolling(boolean limitScrolling) {
-	// if (limitScrolling) {
-	// mapView.getController().setZoom(15);
-	// mapView.setScrollableAreaLimit(sCentralParkBoundingBox);
-	// mapView.setMinZoomLevel(15);
-	// mapView.setMaxZoomLevel(18);
-	// mapView.getController().animateTo(sCentralParkBoundingBox.getCenter());
-	// mShadeAreaOverlay.setEnabled(true);
-	// mapView.invalidate();
-	// } else {
-	// mapView.setScrollableAreaLimit(null);
-	// mapView.setMinZoomLevel(null);
-	// mapView.setMaxZoomLevel(null);
-	// mShadeAreaOverlay.setEnabled(false);
-	// mapView.invalidate();
-	// }
-	// }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		menu.add(0, MENU_LIMIT_SCROLLING_ID, Menu.NONE, "Limit scrolling")
+				.setCheckable(true);
+		MenuItem item = menu.findItem(MENU_LIMIT_SCROLLING_ID);
+		item.setChecked(mapView.getScrollableAreaLimit() != null);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -182,6 +223,10 @@ public class Map extends Activity implements MapEventsReceiver {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
+		// case MENU_LIMIT_SCROLLING_ID:
+		// setLimitScrolling(mapView.getScrollableAreaLimit() == null);
+		// break;
+
 		case R.id.action_about:
 			startActivity(new Intent(this, AboutAndFaqs.class));
 			break;
@@ -225,6 +270,25 @@ public class Map extends Activity implements MapEventsReceiver {
 		// TODO Auto-generated method stub
 		InfoWindow.closeAllInfoWindowsOn(mapView);
 		return true;
+	}
+
+	protected void setLimitScrolling(boolean limitScrolling) {
+		if (limitScrolling) {
+			mapView.getController().setZoom(17);
+			mapView.setScrollableAreaLimit(sCentralParkBoundingBox);
+			mapView.setMinZoomLevel(17);
+			mapView.setMaxZoomLevel(18);
+			// mapView.getController().animateTo(
+			// sCentralParkBoundingBox.getCenter());
+			mShadeAreaOverlay.setEnabled(true);
+			mapView.invalidate();
+		} else {
+			mapView.setScrollableAreaLimit(null);
+			mapView.setMinZoomLevel(null);
+			mapView.setMaxZoomLevel(null);
+			mShadeAreaOverlay.setEnabled(false);
+			mapView.invalidate();
+		}
 	}
 
 	private class MyInfoWindow extends InfoWindow {
@@ -275,17 +339,44 @@ public class Map extends Activity implements MapEventsReceiver {
 		}
 	}
 
-	// class ShadeAreaOverlay extends SafeDrawOverlay {
-	//
-	// public ShadeAreaOverlay(Context ctx) {
-	// super(ctx);
-	// }
-	//
-	// @Override
-	// protected void drawSafe(ISafeCanvas c, MapView osmv, boolean shadow) {
-	// final Projection proj = osmv.getProjection();
-	// // Rect area = proj.toPixels();
-	// // c.drawRect(area, sPaint);
-	// }
-	// }
+	// ===========================================================
+	// Methods
+	// ===========================================================
+
+	// ===========================================================
+	// Inner and Anonymous Classes
+	// ===========================================================
+
+	class ShadeAreaOverlay extends Overlay {
+
+		final GeoPoint mTopLeft;
+		final GeoPoint mBottomRight;
+		final Point mTopLeftPoint = new Point();
+		final Point mBottomRightPoint = new Point();
+
+		public ShadeAreaOverlay(Context ctx) {
+			super(ctx);
+			mTopLeft = new GeoPoint(sCentralParkBoundingBox.getLatNorthE6(),
+					sCentralParkBoundingBox.getLonWestE6());
+			mBottomRight = new GeoPoint(
+					sCentralParkBoundingBox.getLatSouthE6(),
+					sCentralParkBoundingBox.getLonEastE6());
+		}
+
+		@Override
+		protected void draw(Canvas c, MapView osmv, boolean shadow) {
+			if (shadow)
+				return;
+
+			final Projection proj = osmv.getProjection();
+
+			proj.toPixels(mTopLeft, mTopLeftPoint);
+			proj.toPixels(mBottomRight, mBottomRightPoint);
+
+			Rect area = new Rect(mTopLeftPoint.x, mTopLeftPoint.y,
+					mBottomRightPoint.x, mBottomRightPoint.y);
+			c.drawRect(area, sPaint);
+		}
+	}
+
 }
