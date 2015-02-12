@@ -10,6 +10,7 @@ import ueasy.it140.R;
 import ueasy.it140.database.Database;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -27,7 +28,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class AmenityBuildingLevel extends Activity {
+public class AmenityBuildingLevel extends ListActivity {
 
 	Database DB;
 	List<String> amenities;
@@ -48,7 +49,6 @@ public class AmenityBuildingLevel extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search);
 		DB = new Database(this);
 		int bId = 0;
 		int bLevel = 0;
@@ -61,9 +61,10 @@ public class AmenityBuildingLevel extends Activity {
 		}
 
 		ActionBar ab = getActionBar();
-		ab.setTitle(Html.fromHtml("<font size='2px' color='#ffffff'>" + name.toUpperCase() + " LEVEL "
-				+ bLevel + " </font>"));
+		ab.setTitle(Html.fromHtml("<font color='#ffffff'>" + name.toUpperCase()
+				+ " LEVEL " + bLevel + " </font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
+		ab.setDisplayHomeAsUpEnabled(true);
 
 		// Listview Data
 		amenities = new ArrayList<String>();
@@ -72,28 +73,19 @@ public class AmenityBuildingLevel extends Activity {
 
 		Collections.sort(amenities);
 
-		lv = (ListView) findViewById(R.id.list_view);
-		// Adding items to listview
-		adapter = new ArrayAdapter<String>(this, R.layout.search_item,
-				R.id.amenity_name, amenities);
-		lv.setAdapter(adapter);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, amenities);
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> listView, View view,
-					int position, long id) {
-				// Get the cursor, positioned to the corresponding row in the
-				// result set
-				String amenityName = (String) listView
-						.getItemAtPosition(position);
-				// Get the state's capital from this row in the database.
-				Intent i = new Intent(getBaseContext(), AmenityBuilding.class);
-				i.putExtra("AmenityName", amenityName);
-				startActivity(i);
+		setListAdapter(adapter);
 
-			}
-		});
+	}
 
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		String item = (String) getListAdapter().getItem(position);
+		Intent i = new Intent(this, AmenityBuilding.class);
+		i.putExtra("AmenityName", item);
+		startActivity(i);
 	}
 
 	@Override

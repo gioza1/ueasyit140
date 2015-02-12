@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AmenityBuilding extends Activity {
 
@@ -39,10 +38,10 @@ public class AmenityBuilding extends Activity {
 		// DatabaseObject amenity = new DatabaseObject();
 		amenity = DB.getAmenityInformation(b.getString("AmenityName"));
 		amenityName = b.getString("AmenityName");
-		int id = amenity.getID();
+
 		lon = amenity.getLong();
 		lat = amenity.getLat();
-		Toast.makeText(this, Integer.toString(id), Toast.LENGTH_SHORT).show();
+
 		ActionBar ab = getActionBar();
 		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"
 				+ b.getString("AmenityName", "NULL") + " </font>"));
@@ -54,8 +53,6 @@ public class AmenityBuilding extends Activity {
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
 			desc.setText(amenity.getInfo());
 			TextView blevels = (TextView) findViewById(R.id.bldg_level_number);
-			Toast.makeText(this, Integer.toString(amenity.get_blevels()),
-					Toast.LENGTH_SHORT).show();
 			blevels.setText(Integer.toString(amenity.get_blevels()));
 		} else if (amenity.getType().contains("Classroom")) {
 			setContentView(R.layout.room_info);
@@ -114,6 +111,12 @@ public class AmenityBuilding extends Activity {
 		builderSingle.show();
 	}
 
+	public void roomUtilization(View v){
+		Intent in = new Intent(this, RoomUtilization.class);
+		in.putExtra("ClassroomName", amenityName);
+		startActivity(in);
+	}	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub

@@ -14,4 +14,12 @@
 <fullyQualifiedTypeName name="android.util.AttributeSet"/>
 <fullyQualifiedTypeName name="ueasy.it140.activities.BoundedMapView"/>
 <fullyQualifiedTypeName name="org.osmdroid.util.BoundingBoxE6"/>
+<fullyQualifiedTypeName name="android.text.SpannableString"/>
+<fullyQualifiedTypeName name="android.text.Spannable"/>
+<fullyQualifiedTypeName name="android.text.style.TypefaceSpan"/>
+<fullyQualifiedTypeName name="ueasy.it140.R.id"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.R.id"/>
+<fullyQualifiedTypeName name="ueasy.it140.R.style"/>
+<fullyQualifiedTypeName name="android.app.ListActivity"/>
 </qualifiedTypeNameHistroy>

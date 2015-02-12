@@ -47,7 +47,11 @@ public class OtherAmenitiesCategory extends ListActivity {
 	    String title = i.getStringExtra("name");
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    ActionBar ab = getActionBar();
-		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"+title.toUpperCase()+"</font>"));
+	    if(title.contains("Food")){
+	    	title = "Food & Beverages";
+			ab.setTitle(Html.fromHtml("<font color='#ffffff'><small>"+title.toUpperCase()+"<small></font>"));
+	    }else{ab.setTitle(Html.fromHtml("<font color='#ffffff'>"+title.toUpperCase()+"</font>"));
+	    }
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		
 	    List<String> values = DB.Amenities(type);	    
@@ -60,7 +64,6 @@ public class OtherAmenitiesCategory extends ListActivity {
 	  @Override
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
 	    String item = (String) getListAdapter().getItem(position);
-	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
 		 Intent i = new Intent(this,AmenityBuilding.class);
     	 i.putExtra("AmenityName",item);
     	 startActivity(i);

@@ -842,8 +842,56 @@ public class Database extends SQLiteOpenHelper {
 
 	/*-----Check if DB exist-----------*/
 
-	public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
-		File dbFile = context.getDatabasePath(dbName);
-		return dbFile.exists();
+//	public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
+//		File dbFile = context.getDatabasePath(dbName);
+//		return dbFile.exists();
+//	}
+
+
+/*-----Room Utilization-----------*/
+	
+	public String[] roomtUtil(String name){
+		SQLiteDatabase db = this.getWritableDatabase();
+		String[] retVal=new String[6];
+		
+		String[] columns = { Amenities_ID };
+		String[] whereArgs = { "" + name };
+		Cursor cursor = db.query(Table_Amenities, columns, Amenities_name + "=?", whereArgs,
+				null, null, null);
+		cursor.moveToNext();
+		int ndx = cursor.getColumnIndex(Amenities_ID);
+		int id = cursor.getInt(ndx);
+		
+		String[] columns2 = {RoomUtility_Friday, RoomUtility_Monday, RoomUtility_Saturday, 
+				RoomUtility_Thursday, RoomUtility_Tuesday, RoomUtility_Wednesday};
+		String[] whereArgs2 = { "" + id };
+		
+		Cursor cursor2 = db.query(Table_RoomUtility, columns2, RoomUtility_ClassroomID + "=?", whereArgs2,
+				null, null, null);
+		
+		while (cursor2.moveToNext()) {
+			int ndx2 = cursor2.getColumnIndex(RoomUtility_Monday);
+			int ndx3 = cursor2.getColumnIndex(RoomUtility_Tuesday);
+			int ndx4 = cursor2.getColumnIndex(RoomUtility_Wednesday);
+			int ndx5 = cursor2.getColumnIndex(RoomUtility_Thursday);
+			int ndx6 = cursor2.getColumnIndex(RoomUtility_Friday);
+			int ndx7 = cursor2.getColumnIndex(RoomUtility_Saturday);
+			
+			retVal[0] = cursor2.getString(ndx2);
+			retVal[1] = cursor2.getString(ndx3);
+			retVal[2] = cursor2.getString(ndx4);
+			retVal[3] = cursor2.getString(ndx5);
+			retVal[4] = cursor2.getString(ndx6);
+			retVal[5] = cursor2.getString(ndx7);
+		}
+		
+
+		Toast.makeText(context, "Cursor2: "+cursor2.getCount(), Toast.LENGTH_SHORT).show();
+		
+		
+		return retVal;
 	}
+
+
 }
+

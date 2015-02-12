@@ -36,16 +36,17 @@
     <string name="email_label">Email us at: </string>
     <string name="email">confourmus@ueasy.com</string>
     <string name="copyright">All content in this app is © 2014 U-EASY</string>
-    <string name="description">U-EASY Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce interdum non elit at imperdiet. Donec elementum vel purus nec dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In egestas fringilla sem nec feugiat. Aliqua est vehicula ultricies.</string>
+    <string name="description">U-EASY Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce interdum non elit at imperdiet. Donec elementum vel purus nec dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In egestas fringilla sem nec feugiat. Aliqua est vehicula ultricies.
+ U-EASY Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce interdum non elit at imperdiet. Donec elementum vel purus nec dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In egestas fringilla sem nec feugiat. Aliqua est vehicula ultricies.</string>
     <string name="title_activity_campus">Campus</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_category">Category</string>
-        <string name="title_activity_other_amenity">Other Amenity</string>
-        
-        <!--  buildilng information static -->
-        <string name="basic_info">Basic Information</string>
-        <string name="building_levels">Building levels</string>
-        <string name="level_number"> 4</string>
+    <string name="title_activity_other_amenity">Other Amenity</string>
+
+    <!-- buildilng information static -->
+    <string name="basic_info">Basic Information</string>
+    <string name="building_levels">Building levels</string>
+    <string name="level_number"> 4</string>
 
 </resources>

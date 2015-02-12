@@ -45,7 +45,7 @@ public class LevelExpandable extends Activity {
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		ab.setDisplayHomeAsUpEnabled(true);
 		// get the
-		expListView = (ExpandableListView) findViewById(R.id.level_expand);
+		// expListView = (ExpandableListView) findViewById(R.id.level_expand);
 		DB = new Database(this);
 		// preparing list data
 		prepareListData();
@@ -117,7 +117,7 @@ public class LevelExpandable extends Activity {
 		for (int i = 0; i < totalLevels; i++) {
 			listDataHeader.add("Level " + (i + 1));
 			List<String> level = new ArrayList<String>();
-			level.addAll(DB.getAllAmenityInBldgLevel(bId, (i+1)));
+//			level.addAll(DB.getAllAmenityInBldgLevel(bId, (i + 1)));
 			listDataChild.put("Level " + (i + 1), level);
 		}
 		// // Adding child data
