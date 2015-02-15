@@ -118,7 +118,7 @@ import android.widget.TextView;
 
 public class Category extends Activity {
 	final String[] name = { "Building", "Room", "Food and Beverages",
-			"Facility", "Offices" };
+			"Facilities", "Offices" };
 	final int[] icons = { R.drawable.ic_bldg, R.drawable.ic_room,
 			R.drawable.ic_food, R.drawable.ic_facilities, R.drawable.ic_offices };
 
@@ -170,6 +170,13 @@ public class Category extends Activity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.category, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem item = menu.findItem(R.id.action_category);
+		item.setEnabled(false);
+		return true;
 	}
 
 	@Override

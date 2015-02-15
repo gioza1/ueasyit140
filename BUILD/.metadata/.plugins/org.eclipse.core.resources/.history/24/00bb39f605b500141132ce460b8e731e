@@ -1,0 +1,53 @@
+package ueasy.it140.fragments;
+
+import ueasy.it140.R;
+import ueasy.it140.database.Database;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class AboutFragment extends Fragment {
+	
+	Database DB;
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View android = inflater.inflate(R.layout.fragment_about, container,
+				false);
+/*		
+		DB = new Database(getActivity());
+		Cursor cursor = DB.about();
+
+		while (cursor.moveToNext()){
+			TextView appName = (TextView)android.findViewById(R.id.appTitle);
+			appName.setText(cursor.getString(cursor.getColumnIndex("a_name")));
+			
+			TextView version = (TextView)android.findViewById(R.id.version);
+			version.setText(cursor.getString(cursor.getColumnIndex("a_version")));
+			
+			TextView email = (TextView)android.findViewById(R.id.email);
+			email.setText(cursor.getString(cursor.getColumnIndex("a_email")));
+			
+			TextView desc = (TextView)android.findViewById(R.id.appDescription);
+			desc.setText(cursor.getString(cursor.getColumnIndex("a_desc")));
+			
+			TextView footer = (TextView)android.findViewById(R.id.copyright);
+			footer.setText(cursor.getString(cursor.getColumnIndex("a_footer")));
+			
+			TextView year = (TextView)android.findViewById(R.id.copyrightYear);
+			year.setText(cursor.getString(cursor.getColumnIndex("a_year")));
+		}
+*/
+		// ((TextView)android.findViewById(R.id.textView)).setText("Android");
+		// TextView desc = (TextView) android.findViewById(R.id.appDescription);
+		// desc.setMovementMethod(new ScrollingMovementMethod());
+		return android;
+	}
+
+	
+}

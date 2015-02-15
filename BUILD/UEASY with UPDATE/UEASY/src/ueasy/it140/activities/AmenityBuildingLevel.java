@@ -1,7 +1,6 @@
 package ueasy.it140.activities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +8,8 @@ import java.util.List;
 import ueasy.it140.R;
 import ueasy.it140.database.Database;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,11 +18,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class AmenityBuildingLevel extends ListActivity {
 
@@ -49,6 +44,7 @@ public class AmenityBuildingLevel extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.building_level_amenities);
 		DB = new Database(this);
 		int bId = 0;
 		int bLevel = 0;
@@ -61,8 +57,7 @@ public class AmenityBuildingLevel extends ListActivity {
 		}
 
 		ActionBar ab = getActionBar();
-		ab.setTitle(Html.fromHtml("<font color='#ffffff'>" + name.toUpperCase()
-				+ " LEVEL " + bLevel + " </font>"));
+		ab.setTitle(Html.fromHtml("<font color='#ffffff'> UEASY </font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -75,7 +70,8 @@ public class AmenityBuildingLevel extends ListActivity {
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, amenities);
-
+		TextView v = (TextView) findViewById(R.id.amenityName);
+		v.setText(name + " Level " + bLevel);
 		setListAdapter(adapter);
 
 	}

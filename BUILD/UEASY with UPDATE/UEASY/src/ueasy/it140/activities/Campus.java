@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import ueasy.it140.adapters.CampusAdapter;
 import ueasy.it140.database.Database;
-import ueasy.it140.modals.ErrorModal;
+import ueasy.it140.modals.UpdateFail;
 import ueasy.it140.modals.UpdateLater;
 import ueasy.it140.models.CampusModel;
 import android.annotation.SuppressLint;
@@ -24,7 +24,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -46,6 +45,8 @@ public class Campus extends ListActivity {
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		overridePendingTransition(android.R.anim.fade_in,
+				android.R.anim.fade_out);
 		super.onCreate(savedInstanceState);
 
 		copyAssets();
@@ -168,10 +169,7 @@ public class Campus extends ListActivity {
 									"Json Error: " + e, Toast.LENGTH_SHORT)
 									.show();
 						}
-
-						Toast.makeText(getApplicationContext(),
-								"Response: " + response, Toast.LENGTH_SHORT)
-								.show();
+						
 					}
 
 				});

@@ -3,20 +3,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-     
+
     <!-- Editext for Search -->
-    <EditText android:id="@+id/inputSearch"
+
+    <EditText
+        android:id="@+id/inputSearch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Search amenity"
+        android:background="#048abf"
         android:drawableLeft="@drawable/ic_action_search"
+        android:hint="Search amenity"
         android:inputType="textVisiblePassword"
-        android:background="#048abf"/>
-  
+        android:textColorHint="#FFFFFF" />
+
     <!-- List View -->
+
     <ListView
-        android:id="@+id/list_view"
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-  
+
 </LinearLayout>

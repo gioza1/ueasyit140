@@ -1,0 +1,159 @@
+package ueasy.it140.activities;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import ueasy.it140.R;
+import ueasy.it140.adapters.TabPagerAdapter;
+import ueasy.it140.database.Database;
+import ueasy.it140.modals.Confirmation;
+import ueasy.it140.modals.ErrorModal;
+import ueasy.it140.modals.UpdateFail;
+import ueasy.it140.modals.UpdateNotNeeded;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+@SuppressLint("NewApi") public class AboutAndFaqs extends FragmentActivity {
+	ViewPager Tab;
+	TabPagerAdapter TabAdapter;
+	ActionBar actionBar;
+	int db_Version;
+	Database DB;
+
+	
+	 @Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_aboutandfaqs);
+		DB = new Database(this);
+		TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
+		Tab = (ViewPager) findViewById(R.id.pager);
+		Tab.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				actionBar = getActionBar();
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
+		Tab.setAdapter(TabAdapter);
+
+		actionBar = getActionBar();
+		// Enable Tabs on Action Bar
+		actionBar.setTitle("UEASY");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color
+				.parseColor("#048abf")));
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color
+				.parseColor("#dfdfdf")));
+
+		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+			@Override
+			public void onTabReselected(android.app.ActionBar.Tab tab,
+					FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+				Tab.setCurrentItem(tab.getPosition());
+			}
+
+			@Override
+			public void onTabUnselected(android.app.ActionBar.Tab tab,
+					FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+			}
+		};
+		// Add New Tab
+
+		actionBar.addTab(actionBar.newTab().setText("FAQS")
+				.setTabListener(tabListener));
+		actionBar.addTab(actionBar.newTab().setText("ABOUT US")
+				.setTabListener(tabListener));
+	}
+	
+	 
+	 
+	public void checkUpdates(View view) {
+//		Toast.makeText(this, "Module is currently in development",
+//				Toast.LENGTH_SHORT).show();
+		
+		AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        // Checks if new records are inserted in Remote MySQL DB to proceed with Sync operation
+        client.post("http://192.168.254.111/ueasy/databaseVersion.php",params , new AsyncHttpResponseHandler() { 
+        	
+        	public void onSuccess(String response) {
+        		try {
+        			JSONObject obj = new JSONObject(response);
+        			System.out.println(obj.get("count"));
+					db_Version = obj.getInt("count");
+					if(db_Version > DB.DBVersion())
+					{
+						Confirmation confirm = new Confirmation();
+						confirm.show(getFragmentManager(), "Confirm");
+					}
+					else
+					{
+						UpdateNotNeeded noUpdate = new UpdateNotNeeded();
+						noUpdate.show(getFragmentManager(), "No updates");
+					}
+
+					
+				} 
+        		catch (JSONException e) {
+					// TODO Auto-generated catch block
+        			UpdateFail uf = new UpdateFail();
+					uf.show(getFragmentManager(), "Fail");
+				}
+        		
+        	}
+
+			
+        	@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable arg3) {
+				// TODO Auto-generated method stub
+				ErrorModal er = new ErrorModal();
+				er.show(getFragmentManager(), "Error");
+			}
+        	
+        	
+        });
+	}
+	
+	
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// TODO Auto-generated method stub
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			NavUtils.navigateUpFromSameTask(this);
+//			break;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        if (item.getItemId() == android.R.id.home) {
+	            onBackPressed();
+	            return true;
+	        }
+	        return super.onOptionsItemSelected(item);
+	    }
+}

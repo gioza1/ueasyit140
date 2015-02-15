@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ueasy.it140"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ueasy_splash_image"
+        android:label="@string/app_name"
+        android:logo="@drawable/ueasy_splash_image"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ueasy.it140.activities.UeasySplash"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.Campus"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.AboutAndFaqs"
+            android:label="@string/title_activity_campus" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.AmenityBuilding"
+            android:label="@string/title_activity_campus" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.LevelExpandable"
+            android:label="@string/title_activity_campus" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.AmenityBuildingLevel"
+            android:label="@string/title_activity_campus" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.RoomUtilization"
+            android:label="@string/title_activity_category" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.Search"
+            android:label="@string/title_activity_search">
+                    <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable" />
+         </activity>
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.OtherAmenitiesCategory"
+            android:label="@string/title_activity_other_amenity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ueasy.it140.activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.Category"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ueasy.it140.activities.Map" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.SpecificCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ueasy.it140.activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.RoomCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ueasy.it140.activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.Map"
+            android:label="@string/title_activity_map" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ueasy.it140.activities.Campus" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.database.Database"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.BuildingCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.FacilitiesCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.FoodAndBeveragesCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.OfficesCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.specificCategories.RoomCategory"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+        <activity
+            android:name="ueasy.it140.activities.Update"
+            android:label="@string/title_activity_category" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Category" />
+        </activity>
+    </application>
+
+</manifest>

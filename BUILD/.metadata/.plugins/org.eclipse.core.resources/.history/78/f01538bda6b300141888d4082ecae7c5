@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ueasy.it140.MainActivity" >
+
+    <!-- Search Widget -->
+    <item
+        android:id="@+id/action_search_bar"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_launcher"
+        android:showAsAction="always"
+        android:title="Search"/>
+    <item
+        android:id="@+id/a_More"
+        android:icon="@drawable/ic_action_overflow"
+        android:showAsAction="always"
+        android:title="@string/action_title">
+        <menu>
+            <item
+                android:id="@+id/action_category"
+                android:orderInCategory="100"
+                android:title="@string/action_category"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_search"
+                android:orderInCategory="200"
+                android:title="@string/action_search"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_map"
+                android:orderInCategory="300"
+                android:title="@string/action_map"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_about"
+                android:orderInCategory="400"
+                android:title="@string/action_about"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+
+</menu>

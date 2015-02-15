@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp" >
+
+    <ImageView
+        android:id="@+id/campusImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_campus_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bunzel" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#B3000000" >
+
+        <TextView
+            android:id="@+id/campusAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/talamban_campus_address"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/campusName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/campusAddress"
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/talamban_campus"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -157,9 +157,9 @@ public class RoomCategory extends Activity {
 		List<String> lb = new ArrayList<String>();
 		lb = DB.Amenities("ClassroomLB");
 		String type = "ClassroomLB";
-		Toast.makeText(this, Integer.toString(lb.size()), Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, Integer.toString(lb.size()), Toast.LENGTH_SHORT).show();
 		String roomCode = type.substring(9, 11);
-		Toast.makeText(this, roomCode, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, roomCode, Toast.LENGTH_SHORT).show();
 
 		List<String> pe = new ArrayList<String>();
 		pe = DB.Amenities("ClassroomPE");

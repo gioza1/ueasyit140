@@ -9,13 +9,15 @@ import org.json.JSONObject;
 
 import ueasy.it140.R;
 import ueasy.it140.database.Database;
+import ueasy.it140.modals.ErrorModal;
 import ueasy.it140.modals.Success;
+import ueasy.it140.modals.UpdateFail;
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,27 +65,31 @@ public class Update extends ActionBarActivity {
 	int ab_id;			String ab_name; 
 	String ab_version; 	String ab_desc; 
 	String ab_email; 	String ab_footer;
+	String ab_notes;	String ab_year;
+
 			
 	String type;
 	
 	
-	
+	ActionBar ab;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_aboutandfaqs);
+		setContentView(R.layout.update);
 		// Get User records from SQLite DB
 		ArrayList<HashMap<String, String>> crList = controller.getAllClassroom();
 		// If users exists in SQLite DB
-		Toast.makeText(getApplicationContext(), "crList: "+crList.size(), Toast.LENGTH_LONG).show();
-		
+		//Toast.makeText(getApplicationContext(), "crList: "+crList.size(), Toast.LENGTH_LONG).show();
+		ab = getActionBar();
+		ab.hide();
 		
 		// Initialize Progress Dialog properties
 		prgDialog = new ProgressDialog(this);
-		prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
-		prgDialog.setCancelable(true);
+		prgDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		prgDialog.setMessage("Content updating!");
+		prgDialog.setIndeterminate(true);
 		// BroadCase Receiver Intent Object
 //		Intent alarmIntent = new Intent(getApplicationContext(), SampleBC.class);
 		// Pending Intent Object
@@ -120,11 +126,10 @@ public class Update extends ActionBarActivity {
 				@Override
 				public void onSuccess(String response) {
 					// Hide ProgressBar
-					Toast.makeText(getApplicationContext(), "Success na cya", Toast.LENGTH_LONG).show();
-					Toast.makeText(getApplicationContext(), "response: "+ response, Toast.LENGTH_LONG).show();
-					prgDialog.hide();
+					
 					// Update SQLite DB with response sent by getusers.php
 					updateSQLite(response);
+					prgDialog.hide();
 				}
 				// When error occured
 				@Override
@@ -132,14 +137,10 @@ public class Update extends ActionBarActivity {
 					// TODO Auto-generated method stub
 					// Hide ProgressBar
 					prgDialog.hide();
-					if (statusCode == 404) {
-						Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
-					} else if (statusCode == 500) {
-						Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
-					} else {
-						Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]",
-								Toast.LENGTH_SHORT).show();
-					}
+					
+					UpdateFail uf = new UpdateFail();
+					uf.show(getFragmentManager(), "Fail");
+					
 				}
 		});
 	}
@@ -158,17 +159,17 @@ public class Update extends ActionBarActivity {
 			// Extract JSON array from the response
 			JSONArray arr = new JSONArray(response);
 			System.out.println(arr.length());
-			Toast.makeText(getApplicationContext(), "arr lenght:  "+ arr.length() , Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "arr lenght:  "+ arr.length() , Toast.LENGTH_SHORT).show();
 			
 			
 			// If no of array elements is not zero
 			if(arr.length() != 0){
-				
-				Toast.makeText(getApplicationContext(), "Nakasulod sa IF:  ", Toast.LENGTH_SHORT).show();
-				
 				// Loop through each array element, get JSON object which has userid and username
+				int jumpTime=0;
 				for (int i = 0; i < arr.length(); i++) {
-					Toast.makeText(getApplicationContext(), "Naka tuyok na sa FOR:  ", Toast.LENGTH_SHORT).show();
+					
+						jumpTime += (100/arr.length());
+						prgDialog.setProgress(jumpTime);
 					// Get JSON object
 					JSONObject obj = (JSONObject) arr.get(i);
 					
@@ -208,6 +209,7 @@ public class Update extends ActionBarActivity {
 						obj.get("ab_id");			obj.get("ab_version");
 						obj.get("ab_name");			obj.get("ab_email");
 						obj.get("ab_desc");			obj.get("ab_footer");
+						obj.get("ab_year");			obj.get("ab_notes");
 					}
 					
 					else if(type.equals("databaseVersion")) //Getting Campus Data from Json
@@ -233,19 +235,10 @@ public class Update extends ActionBarActivity {
 					
 					// DB QueryValues Object to insert into SQLite
 					queryValues = new HashMap<String, String>();
-					
-					
-					// Add values from the htdocs/ueasy extracted from Object = Common Data
-					
-						Toast.makeText(getApplicationContext(), "saving common to variables", Toast.LENGTH_SHORT).show();
-						
-						
-					
-							
+			
 							
 					if(type.equals("amenity"))
 					{
-						Toast.makeText(getApplicationContext(), "saving Amenity to variables", Toast.LENGTH_SHORT).show();
 						a_catName = obj.getString("a_catName").toString();
 						a_id =Integer.parseInt( obj.getString("a_id").toString());
 						a_bLevel  = Integer.parseInt(obj.getString("a_bLevel").toString());
@@ -279,8 +272,10 @@ public class Update extends ActionBarActivity {
 						ab_email = obj.getString("ab_email").toString();	 	
 						ab_name = obj.getString("ab_name").toString();
 						ab_desc = obj.getString("ab_desc").toString();
-						ab_footer = obj.getString("ab_footer").toString();	 	
-						
+						ab_footer = obj.getString("ab_footer").toString();
+						ab_notes = obj.getString("ab_notes").toString();
+						ab_year = obj.getString("ab_year").toString();	
+							
 					}
 					
 					else if(type.equals("faqs"))
@@ -309,134 +304,61 @@ public class Update extends ActionBarActivity {
 					
 					else 
 					{
-						Toast.makeText(getApplicationContext(), "saving bldg to variables", Toast.LENGTH_SHORT).show();
 						bl_id =Integer.parseInt( obj.getString("bl_id").toString());
 						bl_bID =Integer.parseInt( obj.getString("bldg_id").toString());
 						bl_bNum =Integer.parseInt( obj.getString("bldg_levelNum").toString());
 						
 					}
 					
-					
 	
-					// Add userName extracted from Object
-					//queryValues.put("userName", obj.get("userName").toString());
-					// Insert User into SQLite DB
-
-					
-						
 						if(type.equals("amenity"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Otheramenities:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToAmenity(a_catName, a_id, campus_id, bldg_id, a_bLevel, a_name, a_desc, a_pic, a_la, a_longi);
-							Toast.makeText(getApplicationContext(), "Result  insert OA:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else if(type.equals("utility"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Room Utility:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToRoomUtility(ru_id, cr_id, ru_mon, ru_tue, ru_wed, ru_thu, ru_fri, ru_sat, ru_sun);
-							Toast.makeText(getApplicationContext(), "Result  insert Room Utility:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else if(type.equals("faqs"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Faqs:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToFaqs(f_id, f_ques, f_ans);
-							Toast.makeText(getApplicationContext(), "Result  insert Faqs:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else if(type.equals("about"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa About:  ", Toast.LENGTH_SHORT).show();
-							result = controller.inserToAbout(ab_id, ab_name, ab_version, ab_desc, ab_email, ab_footer);
-							Toast.makeText(getApplicationContext(), "Result  insert About:  "+ result , Toast.LENGTH_SHORT).show();
+							result = controller.inserToAbout(ab_id, ab_name, ab_version, ab_desc, ab_email, ab_footer, ab_year, ab_notes);
 						}
 						
 						else if(type.equals("databaseVersion"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Room Utility:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToDatabase(db_id, db_version);
-							Toast.makeText(getApplicationContext(), "Result  insert Room Utility:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else if(type.equals("campus"))
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Campus:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToCampus(campus_id, c_name, c_addr, c_desc);
-							Toast.makeText(getApplicationContext(), "Result  insert Campus:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 						else
 						{
-							Toast.makeText(getApplicationContext(), "Naka insert sa Level:  ", Toast.LENGTH_SHORT).show();
 							result = controller.inserToBLevel(bl_id, bl_bID, bl_bNum);
-							Toast.makeText(getApplicationContext(), "Result  insert Level:  "+ result , Toast.LENGTH_SHORT).show();
 						}
 						
 		
-					
-					HashMap<String, String> map = new HashMap<String, String>();
-					// Add status for each User in Hashmap
-
-						map.put("type", type);
-						if(type.equals("amenity"))
-						{
-							map.put("a_id", obj.get("a_id").toString());
-							map.put("name", obj.get("a_name").toString());
-							Toast.makeText(getApplicationContext(), "Map: "+type+" "+obj.get("a_id").toString(), Toast.LENGTH_SHORT).show();
-						}
-						
-						else if(type.equals("utility"))
-						{
-							map.put("ru_id", obj.get("ru_id").toString());
-							map.put("name", obj.get("ru_id").toString());
-							Toast.makeText(getApplicationContext(), "Map: "+type+" "+obj.get("ru_id").toString(), Toast.LENGTH_SHORT).show();
-						}
-						
-						else if(type.equals("campus"))
-						{
-							map.put("c_id", obj.get("c_id").toString());
-							map.put("name", obj.get("c_name").toString());
-							Toast.makeText(getApplicationContext(), "Map: "+type+" "+obj.get("c_id").toString(), Toast.LENGTH_SHORT).show();
-						}
-						
-						
-						
-						map.put("status", "1");
-						amenitysynclist.add(map);
-						
-						
 				}
-				// Inform Remote MySQL DB about the completion of Sync activity by passing Sync status of Users
-				updateMySQLSyncSts(gson.toJson(amenitysynclist));
 				// Reload the Main Activity
 				reloadActivity();
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "function error  "+e, Toast.LENGTH_SHORT).show();
+			// TODO Auto-generated catch block=
+			UpdateFail uf = new UpdateFail();
+			uf.show(getFragmentManager(), "Fail");
 		}
 	}
 	
-	// Method to inform remote MySQL DB about completion of Sync activity
-	public void updateMySQLSyncSts(String json) {
-		System.out.println(json);
-		AsyncHttpClient client = new AsyncHttpClient();
-		RequestParams params = new RequestParams();
-		params.put("sync", json);
-		// Make Http call to updatesyncsts.php with JSON parameter which has Sync statuses of Users
-		client.post("http://192.168.56.1/ueasy/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
-			@Override
-			public void onSuccess(String response) {
-				Toast.makeText(getApplicationContext(),	"MySQL DB has been informed about Sync activity", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onFailure(int statusCode, Throwable error, String content) {
-					Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
+	
 	
 	// Reload MainActivity
 	public void reloadActivity() {

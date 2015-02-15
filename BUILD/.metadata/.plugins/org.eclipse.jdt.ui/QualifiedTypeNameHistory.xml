@@ -9,7 +9,6 @@
 <fullyQualifiedTypeName name="org.osmdroid.views.MapController"/>
 <fullyQualifiedTypeName name="android.widget.Scroller"/>
 <fullyQualifiedTypeName name="android.view.MotionEvent"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="org.osmdroid.DefaultResourceProxyImpl"/>
 <fullyQualifiedTypeName name="android.util.AttributeSet"/>
 <fullyQualifiedTypeName name="ueasy.it140.activities.BoundedMapView"/>
@@ -17,9 +16,17 @@
 <fullyQualifiedTypeName name="android.text.SpannableString"/>
 <fullyQualifiedTypeName name="android.text.Spannable"/>
 <fullyQualifiedTypeName name="android.text.style.TypefaceSpan"/>
-<fullyQualifiedTypeName name="ueasy.it140.R.id"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
-<fullyQualifiedTypeName name="ueasy.it140.R.style"/>
 <fullyQualifiedTypeName name="android.app.ListActivity"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="ueasy.it140.R.style"/>
+<fullyQualifiedTypeName name="ueasy.it140.R.layout"/>
+<fullyQualifiedTypeName name="ueasy.it140.R"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="ueasy.it140.R.id"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="android.view.GestureDetector"/>
+<fullyQualifiedTypeName name="android.view.GestureDetector.OnGestureListener"/>
 </qualifiedTypeNameHistroy>

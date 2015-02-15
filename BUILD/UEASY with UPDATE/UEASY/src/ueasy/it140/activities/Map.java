@@ -7,54 +7,50 @@ import org.osmdroid.bonuspack.overlays.InfoWindow;
 import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
 import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.bonuspack.overlays.Marker;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.Projection;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
 import ueasy.it140.R;
-import ueasy.it140.activities.RotationGestureDetector.OnRotationGestureListener;
 import ueasy.it140.database.Database;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.NavUtils;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Map extends Activity implements MapEventsReceiver {
+public class Map extends Activity implements MapEventsReceiver, MapListener {
 	ArrayList<Marker> anotherOverlayItemArray;
 	Database DB;
 	Bundle b;
-	private RotationGestureDetector mRotationDetector;
+
 	// ===========================================================
 	// Constants
 	// ===========================================================
 	public static final String TITLE = "Limited scroll area";
 	public static FixedMapView mapView;
-
-	private static final int MENU_LIMIT_SCROLLING_ID = Menu.FIRST;
 
 	private static final BoundingBoxE6 sCentralParkBoundingBox;
 	// private static final SafePaint sPaint;
@@ -95,7 +91,7 @@ public class Map extends Activity implements MapEventsReceiver {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_map);
-
+		// getIntent().setAction("Already created");
 		// North: 10.3600 -
 		// East: 123.9025 +
 		// South: 10.3500
@@ -125,6 +121,7 @@ public class Map extends Activity implements MapEventsReceiver {
 		// mRotationDetector = new RotationGestureDetector(this);
 
 		mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+		// mapView.
 		// mapView.setMinZoomLevel(17);
 		// mapView.getController().setZoom(17);
 
@@ -136,6 +133,7 @@ public class Map extends Activity implements MapEventsReceiver {
 		mapView.setUseDataConnection(false);
 		mapView.setMultiTouchControls(true);
 		final Scroller mScroller = mapView.getScroller();
+		mScroller.abortAnimation();
 		// mScroller.
 		MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 		DB = new Database(this);
@@ -149,9 +147,19 @@ public class Map extends Activity implements MapEventsReceiver {
 			if (b.containsKey("AmenityName")) {
 				amenity = b.getString("AmenityName");
 				K.add(DB.getAmenityInformation(amenity));
-				mapView.getController().setCenter(
-						new GeoPoint(b.getDouble("Latitude"), b
-								.getDouble("Longitude")));
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						mapView.getController().animateTo(
+								new GeoPoint(b.getDouble("Latitude"), b
+										.getDouble("Longitude")));
+					}
+				}, 100);
+
+				// mapView.getController().setCenter(
+				// new GeoPoint(b.getDouble("Latitude"), b
+				// .getDouble("Longitude")));
+
 			} else {
 				table = b.getString("tableName", "Building");
 				K = DB.getAllDatabaseObject(table);
@@ -180,6 +188,7 @@ public class Map extends Activity implements MapEventsReceiver {
 				InfoWindow infoWindow = new MyInfoWindow(
 						R.layout.bonuspack_bubble, mapView);
 				oi.setInfoWindow(infoWindow);
+
 				anotherOverlayItemArray.add(oi);
 			}
 		}
@@ -188,8 +197,8 @@ public class Map extends Activity implements MapEventsReceiver {
 		// ---
 
 		// Add Scale Bar
-		ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(this);
-		mapView.getOverlays().add(myScaleBarOverlay);
+		// ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(this);
+		// mapView.getOverlays().add(myScaleBarOverlay);
 		// mapView.getOverlayManager().add(mShadeAreaOverlay);
 
 		// InfoWindow.getOpenedInfoWindowsOn(mapView)
@@ -213,11 +222,17 @@ public class Map extends Activity implements MapEventsReceiver {
 		// TODO Auto-generated method stub
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
-		// menu.add(0, MENU_LIMIT_SCROLLING_ID, Menu.NONE, "Limit scrolling")
-		// .setCheckable(true);
-		// MenuItem item = menu.findItem(MENU_LIMIT_SCROLLING_ID);
-		// item.setChecked(mapView.getScrollableAreaLimit() != null);
+
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem item = menu.findItem(R.id.action_map);
+
+		item.setEnabled(false);
+
+		return true;
 	}
 
 	@Override
@@ -240,18 +255,6 @@ public class Map extends Activity implements MapEventsReceiver {
 		case R.id.action_category:
 			startActivity(new Intent(this, Category.class));
 			break;
-		case R.id.action_map:
-			Toast.makeText(this, "You're already viewing me",
-					Toast.LENGTH_SHORT).show();
-			// Intent i = new Intent(this,Map.class);
-			// Bundle c = getIntent().getExtras();
-			// String table = "Classroom";
-			// if(c!=null)
-			// table = c.getString("tableName");
-			// i.putExtra("tableName", table);
-			// startActivity(i);
-
-			break;
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			break;
@@ -263,6 +266,7 @@ public class Map extends Activity implements MapEventsReceiver {
 	@Override
 	public boolean longPressHelper(GeoPoint arg0) {
 		// TODO Auto-generated method stub
+		InfoWindow.closeAllInfoWindowsOn(mapView);
 		return false;
 	}
 
@@ -321,19 +325,14 @@ public class Map extends Activity implements MapEventsReceiver {
 			final String title = current.getTitle();
 			TextView txtTitle = (TextView) mView
 					.findViewById(R.id.bubble_title);
-			// TextView txtDescription = (TextView)
-			// mView.findViewById(R.id.bubble_description);
-			// TextView txtSubdescription = (TextView)
-			// mView.findViewById(R.id.bubble_subdescription);
-
 			txtTitle.setText(title);
-			// txtDescription.setText("Click here to view details!");
-			// txtSubdescription.setText("You can also edit the subdescription");
 			layout.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					// Override Marker's onClick behaviour here
 					Intent i = new Intent(v.getContext(), AmenityBuilding.class);
+
 					i.putExtra("AmenityName", title);
+
 					startActivity(i);
 
 				}
@@ -342,6 +341,61 @@ public class Map extends Activity implements MapEventsReceiver {
 		}
 
 	}
+
+	@Override
+	public boolean onScroll(ScrollEvent arg0) {
+		// TODO Auto-generated method stub
+		InfoWindow.closeAllInfoWindowsOn(mapView);
+		return false;
+	}
+
+	@Override
+	public boolean onZoom(ZoomEvent arg0) {
+		InfoWindow.closeAllInfoWindowsOn(mapView);
+		return true;
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		mapView.getTileProvider().clearTileCache();
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		mapView.getTileProvider().clearTileCache();
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		mapView.getTileProvider().clearTileCache();
+		super.onDestroy();
+	}
+
+	// @Override
+	// protected void onResume() {
+	// Log.v("Example", "onResume");
+	//
+	// String action = getIntent().getAction();
+	// // Prevent endless loop by adding a unique action, don't restart if
+	// // action is present
+	// if (action == null || !action.equals("Already created")) {
+	// Log.v("Example", "Force restart");
+	// Intent intent = new Intent(this, Map.class);
+	// startActivity(intent);
+	// finish();
+	// }
+	// // Remove the unique action so the next time onResume is called it will
+	// // restart
+	// else
+	// getIntent().setAction(null);
+	//
+	// super.onResume();
+	// }
 
 	// ===========================================================
 	// Methods

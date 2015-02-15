@@ -48,5 +48,9 @@
     <string name="basic_info">Basic Information</string>
     <string name="building_levels">Building levels</string>
     <string name="level_number"> 4</string>
+    
+    
+     <string name="search_label">Search</string>
+    <string name="search_hint">Search Names</string>
 
 </resources>

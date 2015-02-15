@@ -10,14 +10,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.Html;
-import android.text.TextUtils.TruncateAt;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class AmenityBuilding extends Activity {
@@ -43,8 +42,7 @@ public class AmenityBuilding extends Activity {
 		lat = amenity.getLat();
 
 		ActionBar ab = getActionBar();
-		ab.setTitle(Html.fromHtml("<font color='#ffffff'>"
-				+ b.getString("AmenityName", "NULL") + " </font>"));
+		ab.setTitle(Html.fromHtml("<font color='#ffffff'> INFORMATION </font>"));
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
 		ab.setDisplayHomeAsUpEnabled(true);
 
@@ -52,16 +50,27 @@ public class AmenityBuilding extends Activity {
 			setContentView(R.layout.building_info);
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
 			desc.setText(amenity.getInfo());
-			TextView blevels = (TextView) findViewById(R.id.bldg_level_number);
-			blevels.setText(Integer.toString(amenity.get_blevels()));
+			TextView name = (TextView) findViewById(R.id.amenityName);
+			name.setText(amenityName);
+			
+			// TextView blevels = (TextView)
+			// findViewById(R.id.bldg_level_number);
+			// blevels.setText(Integer.toString(amenity.get_blevels()));
+			Button b = (Button) findViewById(R.id.bldg_levels);
+			b.setText("Building Levels: "
+					+ Integer.toString(amenity.get_blevels()));
 		} else if (amenity.getType().contains("Classroom")) {
 			setContentView(R.layout.room_info);
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
+			TextView name = (TextView) findViewById(R.id.amenityName);
+			name.setText(amenityName);
 			desc.setText(amenity.getInfo());
 		} else {
 			setContentView(R.layout.amenity_main);
 			TextView desc = (TextView) findViewById(R.id.BasicInfoCont);
 			desc.setText(amenity.getInfo());
+			TextView name = (TextView) findViewById(R.id.amenityName);
+			name.setText(amenityName);
 		}
 		// DB.
 
@@ -111,12 +120,12 @@ public class AmenityBuilding extends Activity {
 		builderSingle.show();
 	}
 
-	public void roomUtilization(View v){
+	public void roomUtilization(View v) {
 		Intent in = new Intent(this, RoomUtilization.class);
 		in.putExtra("ClassroomName", amenityName);
 		startActivity(in);
-	}	
-	
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub

@@ -9,6 +9,7 @@ import ueasy.it140.adapters.TabPagerAdapter;
 import ueasy.it140.database.Database;
 import ueasy.it140.modals.Confirmation;
 import ueasy.it140.modals.ErrorModal;
+import ueasy.it140.modals.UpdateFail;
 import ueasy.it140.modals.UpdateNotNeeded;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -117,11 +118,11 @@ import com.loopj.android.http.RequestParams;
 				} 
         		catch (JSONException e) {
 					// TODO Auto-generated catch block
-					Toast.makeText(getApplicationContext(), "Json Error: "+e, Toast.LENGTH_SHORT).show();
-				}
+					UpdateFail uf = new UpdateFail();
+					uf.show(getFragmentManager(), "Fail");
+			}
         		
        		
-        		Toast.makeText(getApplicationContext(), "Response: "+ response, Toast.LENGTH_SHORT).show();
         	}
 
 			

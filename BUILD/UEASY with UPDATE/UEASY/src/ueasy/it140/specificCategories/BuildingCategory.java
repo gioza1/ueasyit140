@@ -61,7 +61,7 @@ public class BuildingCategory extends ListActivity implements Parcelable {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		String item = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
 		Intent i = new Intent(this, AmenityBuilding.class);
 		i.putExtra("AmenityName", item);
 		startActivity(i);

@@ -3,9 +3,14 @@ package ueasy.it140.activities;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.osmdroid.bonuspack.overlays.InfoWindow;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -32,7 +37,9 @@ public class FixedMapView extends MapView {
 			if (this.getZoomLevel() != 18 && ev.getPointerCount() > 1) {
 				// Catch pointer 2 down and check if pointer count > 1 to
 				// activate zoom
+		
 				mode = ZOOM;
+
 			}
 			break;
 		case MotionEvent.ACTION_MOVE:

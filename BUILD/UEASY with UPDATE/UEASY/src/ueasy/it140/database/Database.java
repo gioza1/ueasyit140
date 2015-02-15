@@ -82,6 +82,8 @@ public class Database extends SQLiteOpenHelper {
 	public static final String About_Email = "a_email";
 	public static final String About_Desc = "a_desc";
 	public static final String About_Footer = "a_footer";
+	public static final String About_Notes = "a_notes";
+	public static final String About_Year = "a_year";
 
 	/* DatabaseVersion Variables */
 	public static final String DB_ID = "db_id";
@@ -147,7 +149,9 @@ public class Database extends SQLiteOpenHelper {
 		queryAbout = "CREATE TABLE " + Table_About + "(" + About_ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + About_Name
 				+ " TEXT, " + About_Version + " TEXT, " + About_Email
-				+ " TEXT, " + About_Desc + " TEXT, " + About_Footer + " TEXT);";
+				+ " TEXT, " + About_Desc + " TEXT, " + About_Year
+				+ " INTEGER, " + About_Notes + " TEXT, " + About_Footer
+				+ " TEXT);";
 		db.execSQL(queryAbout);
 
 		// Inserting DB Version
@@ -189,10 +193,11 @@ public class Database extends SQLiteOpenHelper {
 		List<DatabaseObject> contactList = new ArrayList<DatabaseObject>();
 		String selectQuery;
 		// Select All Query
-
+		
 		selectQuery = "SELECT  * FROM " + Table_Amenities + " WHERE "
 				+ Amenities_catName + "= '" + type + "'";
-
+		
+		Log.d(TAG, selectQuery);
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		String[] cNames = cursor.getColumnNames();
@@ -203,7 +208,7 @@ public class Database extends SQLiteOpenHelper {
 				DatabaseObject data = new DatabaseObject();
 
 				for (int i = 0; i < cNames.length; i++) {
-					if (cNames[i].contains("_id")) {
+					if (cNames[i].contains("amenity_id")) {
 						data.setID(Integer.parseInt(cursor.getString(cursor
 								.getColumnIndex(cNames[i]))));
 					}
@@ -253,13 +258,14 @@ public class Database extends SQLiteOpenHelper {
 			// cursor2 = db.query(Table_Amenities, columns2, Amenities_catName
 			// + " LIKE ?", args, null, null, null);
 			String rq = "SELECT " + Amenities_name + " FROM " + Table_Amenities
-					+ " WHERE " + Amenities_name + " LIKE '" + roomCode + "%'";
+					+ " WHERE " + Amenities_name + " LIKE '" + roomCode
+					+ "%' ORDER BY " + Amenities_name + " ASC";
 			// String rq
 			// ="SELECT amenity_name FROM Amenities WHERE amenity_name LIKE '"+roomCode+"%'";
 			cursor2 = db.rawQuery(rq, null);
 		} else {
 			cursor2 = db.query(Table_Amenities, columns2, Amenities_catName
-					+ "=?", whereArgs, null, null, null);
+					+ "=?", whereArgs, null, null, Amenities_name + " ASC");
 		}
 
 		while (cursor2.moveToNext()) {
@@ -396,6 +402,37 @@ public class Database extends SQLiteOpenHelper {
 		return cursor;
 	}
 
+	/**
+	 * Reading all rows from database
+	 */
+
+	public Cursor getSearchResults(String keyword, int from, int to) {
+		// String selectQuery =
+		// "SELECT amenity_id _id, amenity_name FROM Amenities WHERE amenity_name LIKE '%"
+		// + keyword + "%'";
+		//
+		String selectQuery = "SELECT amenity_id _id, amenity_name FROM Amenities WHERE amenity_name LIKE '%"
+				+ keyword + "%' LIMIT " + from + ", " + to;
+		Log.d(TAG, "getSearchResults SQL: " + selectQuery);
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		return cursor;
+	}
+	
+	public int getSearchResultsCount(String keyword) {
+		// String selectQuery =
+		// "SELECT amenity_id _id, amenity_name FROM Amenities WHERE amenity_name LIKE '%"
+		// + keyword + "%'";
+		//
+		String selectQuery = "SELECT amenity_id _id, amenity_name FROM Amenities WHERE amenity_name LIKE '%"
+				+ keyword + "%'";
+		Log.d(TAG, "getSearchResultsCount SQL: " + selectQuery);
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		return cursor.getCount();
+	}
+
+
 	public Cursor getAmenityNameCursor(String inputText) throws SQLException {
 		Log.w(TAG, inputText);
 
@@ -519,8 +556,6 @@ public class Database extends SQLiteOpenHelper {
 		Cursor cursor = db.query(table, columns, columnID + "=?", whereArgs,
 				null, null, null);
 		cursor.moveToNext();
-		Toast.makeText(context, "Cursor count: " + cursor.getCount(),
-				Toast.LENGTH_SHORT).show();
 		return cursor.getCount();
 	}
 
@@ -656,8 +691,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_Campus, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 
@@ -689,8 +722,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = database.insert(Table_Amenities, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 	}
@@ -712,8 +743,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_BuildingLevel, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 
@@ -744,8 +773,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_RoomUtility, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 
@@ -766,8 +793,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_DB, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 	}
@@ -788,15 +813,14 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_Faqs, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 
 	}
 
 	public long inserToAbout(int ab_id, String ab_name, String ab_version,
-			String ab_desc, String ab_email, String ab_footer) {
+			String ab_desc, String ab_email, String ab_footer, String ab_year,
+			String ab_notes) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		long retVal = 0;
 		ContentValues values = new ContentValues();
@@ -804,8 +828,10 @@ public class Database extends SQLiteOpenHelper {
 		values.put(About_Name, ab_name);
 		values.put(About_Version, ab_version);
 		values.put(About_Email, ab_email);
-		values.put(About_Version, ab_desc);
+		values.put(About_Desc, ab_desc);
 		values.put(About_Footer, ab_footer);
+		values.put(About_Year, ab_year);
+		values.put(About_Notes, ab_notes);
 
 		if (getID(ab_id, Table_About, About_ID) > 0) {
 			String[] whereArgs = { "" + ab_id };
@@ -815,8 +841,6 @@ public class Database extends SQLiteOpenHelper {
 		else {
 			retVal = db.insert(Table_About, null, values);
 		}
-		Toast.makeText(this.context, "retVal in DB: " + retVal,
-				Toast.LENGTH_SHORT).show();
 
 		return retVal;
 
@@ -842,33 +866,33 @@ public class Database extends SQLiteOpenHelper {
 
 	/*-----Check if DB exist-----------*/
 
-//	public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
-//		File dbFile = context.getDatabasePath(dbName);
-//		return dbFile.exists();
-//	}
+	// public boolean doesDatabaseExist(ContextWrapper context, String dbName) {
+	// File dbFile = context.getDatabasePath(dbName);
+	// return dbFile.exists();
+	// }
 
+	/*-----Room Utilization-----------*/
 
-/*-----Room Utilization-----------*/
-	
-	public String[] roomtUtil(String name){
+	public String[] roomtUtil(String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		String[] retVal=new String[6];
-		
+		String[] retVal = new String[6];
+
 		String[] columns = { Amenities_ID };
 		String[] whereArgs = { "" + name };
-		Cursor cursor = db.query(Table_Amenities, columns, Amenities_name + "=?", whereArgs,
-				null, null, null);
+		Cursor cursor = db.query(Table_Amenities, columns, Amenities_name
+				+ "=?", whereArgs, null, null, null);
 		cursor.moveToNext();
 		int ndx = cursor.getColumnIndex(Amenities_ID);
 		int id = cursor.getInt(ndx);
-		
-		String[] columns2 = {RoomUtility_Friday, RoomUtility_Monday, RoomUtility_Saturday, 
-				RoomUtility_Thursday, RoomUtility_Tuesday, RoomUtility_Wednesday};
+
+		String[] columns2 = { RoomUtility_Friday, RoomUtility_Monday,
+				RoomUtility_Saturday, RoomUtility_Thursday,
+				RoomUtility_Tuesday, RoomUtility_Wednesday };
 		String[] whereArgs2 = { "" + id };
-		
-		Cursor cursor2 = db.query(Table_RoomUtility, columns2, RoomUtility_ClassroomID + "=?", whereArgs2,
-				null, null, null);
-		
+
+		Cursor cursor2 = db.query(Table_RoomUtility, columns2,
+				RoomUtility_ClassroomID + "=?", whereArgs2, null, null, null);
+
 		while (cursor2.moveToNext()) {
 			int ndx2 = cursor2.getColumnIndex(RoomUtility_Monday);
 			int ndx3 = cursor2.getColumnIndex(RoomUtility_Tuesday);
@@ -876,7 +900,7 @@ public class Database extends SQLiteOpenHelper {
 			int ndx5 = cursor2.getColumnIndex(RoomUtility_Thursday);
 			int ndx6 = cursor2.getColumnIndex(RoomUtility_Friday);
 			int ndx7 = cursor2.getColumnIndex(RoomUtility_Saturday);
-			
+
 			retVal[0] = cursor2.getString(ndx2);
 			retVal[1] = cursor2.getString(ndx3);
 			retVal[2] = cursor2.getString(ndx4);
@@ -884,14 +908,38 @@ public class Database extends SQLiteOpenHelper {
 			retVal[4] = cursor2.getString(ndx6);
 			retVal[5] = cursor2.getString(ndx7);
 		}
-		
 
-		Toast.makeText(context, "Cursor2: "+cursor2.getCount(), Toast.LENGTH_SHORT).show();
-		
-		
 		return retVal;
 	}
 
+	public String[] faqs(String type) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		int i = 0;
+		String[] columns = { Faqs_Answer };
+
+		if (type.equals("Question")) {
+			columns[0] = Faqs_Question;
+		}
+		Cursor cursor = db.query(Table_Faqs, columns, null, null, null, null,
+				Faqs_ID + " ASC");
+		String[] retVal = new String[cursor.getCount()];
+		while (cursor.moveToNext()) {
+
+			int ndx = cursor.getColumnIndex(Faqs_Answer);
+			if (type.equals("Question")) {
+				ndx = cursor.getColumnIndex(Faqs_Question);
+			}
+			retVal[i++] = cursor.getString(ndx);
+		}
+		return retVal;
+	}
+	public Cursor about(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(
+				"SELECT * FROM "+Table_About+" where "+About_ID+"='1'", null);
+		
+		return cursor;
+		
+	}
 
 }
-

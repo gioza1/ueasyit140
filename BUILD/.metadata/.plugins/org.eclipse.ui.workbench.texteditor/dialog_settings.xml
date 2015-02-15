@@ -5,17 +5,17 @@
 		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
-		<item value="false" key="wrap"/>
-		<item value="true" key="wholeword"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="does"/>
-			<item value="doe"/>
-			<item value="doesdbexist"/>
-			<item value="doesdb"/>
-			<item value="doesDB"/>
+			<item value="finish"/>
 			<item value="Toast"/>
-			<item value="rotation"/>
-			<item value="attr"/>
+			<item value="getAllAMenity"/>
+			<item value="getAll"/>
+			<item value="faq"/>
+			<item value="selectQuery"/>
+			<item value="get"/>
+			<item value="getKeywor"/>
 		</list>
 		<list key="replacehistory">
 		</list>

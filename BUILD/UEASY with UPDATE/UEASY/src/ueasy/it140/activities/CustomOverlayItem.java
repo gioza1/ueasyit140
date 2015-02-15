@@ -1,6 +1,5 @@
 package ueasy.it140.activities;
 
-import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 
 import android.graphics.Point;

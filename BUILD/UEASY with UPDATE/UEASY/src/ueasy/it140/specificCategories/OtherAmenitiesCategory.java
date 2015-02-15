@@ -30,82 +30,82 @@ import android.widget.Toast;
 public class OtherAmenitiesCategory extends ListActivity {
 
 	Database DB;
-	
-	  @SuppressLint("DefaultLocale")
-	  public void onCreate(Bundle icicle) {
-	    super.onCreate(icicle);
-	    
-	    Intent intent = getIntent();
-	    
-	    String type = intent.getStringExtra("name");
-	    
-	    DB = new Database(this);
-	    
+	String title;
 
-	    
-	    Intent i = getIntent();
-	    String title = i.getStringExtra("name");
+	@SuppressLint("DefaultLocale")
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
+
+		Intent intent = getIntent();
+
+		String type = intent.getStringExtra("name");
+
+		DB = new Database(this);
+
+		Intent i = getIntent();
+		title = i.getStringExtra("name");
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-	    ActionBar ab = getActionBar();
-	    if(title.contains("Food")){
-	    	title = "Food & Beverages";
-			ab.setTitle(Html.fromHtml("<font color='#ffffff'><small>"+title.toUpperCase()+"<small></font>"));
-	    }else{ab.setTitle(Html.fromHtml("<font color='#ffffff'>"+title.toUpperCase()+"</font>"));
-	    }
+		ActionBar ab = getActionBar();
+		if (title.contains("Food")) {
+			ab.setTitle(Html
+					.fromHtml("<font color='#ffffff'><small> Food & Beverages <small></font>"));
+		} else {
+			ab.setTitle(Html.fromHtml("<font color='#ffffff'>"
+					+ title.toUpperCase() + "</font>"));
+		}
 		ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#048abf")));
-		
-	    List<String> values = DB.Amenities(type);	    
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	        android.R.layout.simple_list_item_1, values);
-	    
-	    setListAdapter(adapter);
-	  }
 
-	  @Override
-	  protected void onListItemClick(ListView l, View v, int position, long id) {
-	    String item = (String) getListAdapter().getItem(position);
-		 Intent i = new Intent(this,AmenityBuilding.class);
-    	 i.putExtra("AmenityName",item);
-    	 startActivity(i);
-	  }
-	  
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// TODO Auto-generated method stub
-			MenuInflater inflater = getMenuInflater();
-			inflater.inflate(R.menu.specific_category, menu);
-			return super.onCreateOptionsMenu(menu);
+		List<String> values = DB.Amenities(type);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, values);
+
+		setListAdapter(adapter);
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		String item = (String) getListAdapter().getItem(position);
+		Intent i = new Intent(this, AmenityBuilding.class);
+		i.putExtra("AmenityName", item);
+		startActivity(i);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.specific_category, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.showInMap:
+			Intent i = new Intent(this, Map.class);
+			i.putExtra("tableName", title);
+			// i.putExtra
+			startActivity(i);
+
+			break;
+		case R.id.action_about:
+			startActivity(new Intent(this, AboutAndFaqs.class));
+			break;
+		case R.id.action_search:
+			startActivity(new Intent(this, Search.class));
+			break;
+		case R.id.action_category:
+			startActivity(new Intent(this, Category.class));
+			break;
+		case R.id.action_map:
+			startActivity(new Intent(this, Map.class));
+			break;
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			break;
 		}
-
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			// TODO Auto-generated method stub
-			switch(item.getItemId())
-			{
-			case R.id.showInMap:
-				Intent i = new Intent(this,Map.class);
-				i.putExtra("tableName", "OtherAmenities");
-//				i.putExtra
-				startActivity(i);
-
-				break;
-			case R.id.action_about:
-				startActivity(new Intent(this,AboutAndFaqs.class));
-				break;
-			case R.id.action_search:
-				startActivity(new Intent(this,Search.class));
-				break;
-			case R.id.action_category:
-				startActivity(new Intent(this,Category.class));
-				break;
-			case R.id.action_map:
-				startActivity(new Intent(this,Map.class));
-				break;
-		    case android.R.id.home:
-		        NavUtils.navigateUpFromSameTask(this);
-		        break;
-			}
-			return super.onOptionsItemSelected(item);
-		}
+		return super.onOptionsItemSelected(item);
+	}
 
 }
