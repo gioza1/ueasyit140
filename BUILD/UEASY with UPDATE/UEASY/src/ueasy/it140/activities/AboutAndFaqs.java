@@ -1,5 +1,6 @@
 package ueasy.it140.activities;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,6 +8,7 @@ import ueasy.it140.R;
 import ueasy.it140.adapters.TabPagerAdapter;
 import ueasy.it140.database.Database;
 import ueasy.it140.modals.Confirmation;
+import ueasy.it140.modals.ErrorModal;
 import ueasy.it140.modals.UpdateNotNeeded;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -93,11 +95,9 @@ import com.loopj.android.http.RequestParams;
 		AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         // Checks if new records are inserted in Remote MySQL DB to proceed with Sync operation
-        client.post("http://192.168.254.103/ueasy/databaseVersion.php",params , new AsyncHttpResponseHandler() { 
+        client.post("http://192.168.56.1/ueasy/databaseVersion.php",params , new AsyncHttpResponseHandler() { 
         	
         	public void onSuccess(String response) {
-        		
-      		       		
         		try {
         			JSONObject obj = new JSONObject(response);
         			System.out.println(obj.get("count"));
@@ -123,8 +123,20 @@ import com.loopj.android.http.RequestParams;
        		
         		Toast.makeText(getApplicationContext(), "Response: "+ response, Toast.LENGTH_SHORT).show();
         	}
+
+			
+        	@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable arg3) {
+				// TODO Auto-generated method stub
+				ErrorModal er = new ErrorModal();
+				er.show(getFragmentManager(), "Error");
+			}
+        	
+        	
         });
 	}
+	
 	
 //	@Override
 //	public boolean onOptionsItemSelected(MenuItem item) {

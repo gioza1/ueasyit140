@@ -37,25 +37,18 @@
         <activity
             android:name="ueasy.it140.activities.AboutAndFaqs"
             android:label="@string/title_activity_campus" >
-  
         </activity>
-        
-            <activity
+        <activity
             android:name="ueasy.it140.activities.AmenityBuilding"
             android:label="@string/title_activity_campus" >
-  
         </activity>
-        
-                     <activity
+        <activity
             android:name="ueasy.it140.activities.LevelExpandable"
             android:label="@string/title_activity_campus" >
-  
         </activity>
-        
-                <activity
+        <activity
             android:name="ueasy.it140.activities.AmenityBuildingLevel"
             android:label="@string/title_activity_campus" >
-  
         </activity>
         <activity
             android:name="ueasy.it140.activities.Search"

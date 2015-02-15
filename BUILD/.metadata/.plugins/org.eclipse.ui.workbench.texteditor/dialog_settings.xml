@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item value="false" key="isRegEx"/>
-		<item value="db.update" key="selection"/>
-		<item value="false" key="casesensitive"/>
+		<item value="true" key="isRegEx"/>
+		<item value="rotation" key="selection"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="db.update"/>
-			<item value="copyDatabase"/>
-			<item value="doesDatabase"/>
-			<item value="DB_"/>
-			<item value="does"/>
-			<item value="doesThis"/>
+			<item value="rotation"/>
+			<item value="attr"/>
+			<item value="sequence"/>
+			<item value="se"/>
+			<item value="sqlite_sequence"/>
+			<item value="sqlite"/>
+			<item value="creat"/>
+			<item value="geopoints"/>
 		</list>
 		<list key="replacehistory">
 		</list>

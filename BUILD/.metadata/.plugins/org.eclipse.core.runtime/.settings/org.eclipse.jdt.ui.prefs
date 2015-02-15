@@ -1,4 +1,4 @@
-content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"/>
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="org.osmdroid.views.MapView"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="org.osmdroid.api.IMapView"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="org.osmdroid.views.util.constants.MapViewConstants"><rhs name\="ueasy.it140.activities.BoundedMapView"/><rhs name\="org.osmdroid.util.BoundingBoxE6"/></lhs><lhs name\="org.metalev.multitouch.controller.MultiTouchController$MultiTouchObjectCanvas"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.ViewGroup"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.ViewParent"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.ViewManager"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.View"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.graphics.drawable.Drawable$Callback"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.KeyEvent$Callback"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.view.accessibility.AccessibilityEventSource"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="ueasy.it140.activities.BoundedMapView"><rhs name\="ueasy.it140.activities.BoundedMapView"/></lhs><lhs name\="android.os.Parcelable"><rhs name\="org.osmdroid.util.BoundingBoxE6"/></lhs><lhs name\="org.osmdroid.util.BoundingBoxE6"><rhs name\="org.osmdroid.util.BoundingBoxE6"/></lhs></history>
 content_assist_number_of_computers=12
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=0,0,0
@@ -7,6 +7,8 @@ fontPropagated=true
 org.eclipse.jdt.ui.editor.tab.width=
 org.eclipse.jdt.ui.formatterprofiles.version=12
 org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.templates_migrated=true
 org.eclipse.jface.textfont=1|Consolas|10.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Consolas;

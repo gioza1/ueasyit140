@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import ueasy.it140.adapters.CampusAdapter;
 import ueasy.it140.database.Database;
+import ueasy.it140.modals.ErrorModal;
 import ueasy.it140.modals.UpdateLater;
 import ueasy.it140.models.CampusModel;
 import android.annotation.SuppressLint;
@@ -23,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -47,18 +49,13 @@ public class Campus extends ListActivity {
 		
 		DB = new Database(this);
 		DB.getWritableDatabase();
-		if(!DB.doesDatabaseExist(this,DB.DB_OffcialName))
-		{
-		    try 
-		    {
-		        DB.copyDataBase();
-		    } 
-		    catch (IOException e) 
-		    {
-		        Log.d("Error", e.toString());
-		    }
+		try {
+			if(DB.DBVersion()==0)
+			DB.copyDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+//			Message.message(this, e.toString());
 		}
-//			DB.copyDataBase();
 		
 		checkUpdates();
 				
@@ -145,7 +142,7 @@ public class Campus extends ListActivity {
 		AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         // Checks if new records are inserted in Remote MySQL DB to proceed with Sync operation
-        client.post("http://192.168.254.103/ueasy/databaseVersion.php",params , new AsyncHttpResponseHandler() { 
+        client.post("http://192.168.56.1/ueasy/databaseVersion.php",params , new AsyncHttpResponseHandler() { 
         	
         	public void onSuccess(String response) {
         		
@@ -170,6 +167,8 @@ public class Campus extends ListActivity {
         		
         		Toast.makeText(getApplicationContext(), "Response: "+ response, Toast.LENGTH_SHORT).show();
         	}
+        	
+        	
         });
 	}
 	

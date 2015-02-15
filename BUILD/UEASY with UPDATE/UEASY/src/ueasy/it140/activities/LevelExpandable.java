@@ -9,6 +9,7 @@ import ueasy.it140.database.Database;
 import ueasy.it140.adapters.ExpandableListAdapter;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class LevelExpandable extends Activity {
 	HashMap<String, List<String>> listDataChild;
 	Bundle b;
 	String bldgName;
+	int bId;
 	Database DB;
 
 	@Override
@@ -36,6 +38,7 @@ public class LevelExpandable extends Activity {
 		setContentView(R.layout.level_main);
 		b = getIntent().getExtras();
 		bldgName = b.getString("BuildingName", "NULL");
+		bId = b.getInt("BuildingID");
 		ActionBar ab = getActionBar();
 		ab.setTitle(Html.fromHtml("<font color='#ffffff'>" + bldgName
 				+ " </font>"));
@@ -105,24 +108,19 @@ public class LevelExpandable extends Activity {
 		listDataChild = new HashMap<String, List<String>>();
 
 		int totalLevels = DB.getNumBldgLevel(bldgName);
-		listDataHeader = DB.getAllAmenityInBldgLevel("Philip Van Engelen", 1);
-		Toast.makeText(getBaseContext(),
-				Integer.toString(listDataHeader.size()), Toast.LENGTH_SHORT)
-				.show();
 
-		for (int i = 0; i > totalLevels; i++) {
-			// Toast.makeText(getBaseContext(), Integer.toString(i),
-			// Toast.LENGTH_SHORT).show();
-			//
-			for (String k : DB.getAllAmenityInBldgLevel(bldgName, i)) {
-				Toast.makeText(getBaseContext(), k, Toast.LENGTH_SHORT).show();
-			}
+		Toast.makeText(getBaseContext(), bldgName, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), Integer.toString(totalLevels),
+				Toast.LENGTH_SHORT).show();
+
+		// }
+		for (int i = 0; i < totalLevels; i++) {
 			listDataHeader.add("Level " + (i + 1));
 			List<String> level = new ArrayList<String>();
-			level.addAll(DB.getAllAmenityInBldgLevel(bldgName, i));
+			level.addAll(DB.getAllAmenityInBldgLevel(bId, (i+1)));
 			listDataChild.put("Level " + (i + 1), level);
 		}
-		// // // Adding child data
+		// // Adding child data
 		// listDataHeader.add("Level 3");
 		// listDataHeader.add("Level 2");
 		// listDataHeader.add("Level 1");
@@ -153,7 +151,7 @@ public class LevelExpandable extends Activity {
 		// level_1.add("LB 105");
 		//
 		// listDataChild.put(listDataHeader.get(0), level3); // Header, Child
-		// data
+		// // data
 		// listDataChild.put(listDataHeader.get(1), level_2);
 		// listDataChild.put(listDataHeader.get(2), level_1);
 
