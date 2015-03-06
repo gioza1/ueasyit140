@@ -1,0 +1,134 @@
+=====================================================================
+[PROJECT NAME]............ USC Easy Access for Students and You (U-EASY)
+[RELEASE VERSION]......... v3.00.00
+[RELEASE DATE]............ 2014/02/14
+[PLATFORM / VERSION]...... Android 14 and newer
+                           Java 1.8
+
+[SUPPORTED MODULES] ------------------------------------------------
+
+    1. About
+    2. Category 
+    3. Search
+    4. Map
+    5. View Amenity Information
+    6. Content Update
+    
+
+[LIMITATIONS] -------------------------------------------------------
+ 
+    1.  [SEARCH] Results will appear only after when 3 letters have been inputted in the search bar.
+    2.  [ABOUT] There are only 10 questions shown.
+    3.  [MAP] Only default markers are shown.
+    4.  [MAP] The current maximum zoom level is limited to what the Osmdroid API offers.
+    5.  [MAP] Tiles are depedent on the OpenStreetMap tile provider.
+    6.  [MAP] Empty tiles are shown as empty gray grids.
+    7.  [MAP] To limit the amount of the redundant and/or irrelevant tiles, the scroll area is limited
+    8.  [UPDATE] Requires  a computer to update contents.
+    9.	[MAP] OSMDroid library bug on zoom when using offline tiles. Sometimes, it will have a flinging motion.
+    10. [UPDATE] Local update only.  
+    
+
+[KNOWN BUGS] --------------------------------------------------------
+    
+    
+[FIXED BUGS] --------------------------------------------------------
+
+
+[RELEASE FILES] -----------------------------------------------------
+
+    1. <APPLICATION FILENAME>
+     Filename: UEASY_2014_Release_03.00.apk
+    2. <DATABASE BACKUP FILENAME>
+     Filename: UEASY-DB_20141219_Release_02.00.backup
+
+
+[ADDED FILES] -------------------------------------------------------
+
+    1. View Amenity Information
+       UEASY\it140\activities\AmenityBuilding.java
+       UEASY\it140\activities\AmenityBuildingLevel.java
+       UEASY\it140\activities\RoomUtilization.java
+       UEASY\res\amenity_main.xml
+       UEASY\res\building_info.xml
+       UEASY\res\room_util_main.xml
+       
+    2. Content Update :
+       UEASY\it140\activities\Update.java
+       UEASY\it140\modals\Confirmation.java
+       UEASY\it140\modals\ErrorModal.java
+       UEASY\it140\modals\Success.java
+       UEASY\it140\modals\UpdateFail.java
+       UEASY\it140\modals\UpdateLater.java
+       UEASY\it140\modals\UpdateNotNeeded.java
+       UEASY\res\layout\update.xml
+
+    3. Map :
+       UEASY\it140\activities\FixedMapView.java
+
+    4. Search:
+       UEASY\res\menu\search_menu.xml
+
+
+[MODIFIED FILES]  ---------------------------------------------------
+
+    1. Map :
+       UEASY\it140\activities\Map.java
+       UEASY\it140\activities\Campus.java
+       UEASY\it140\activities\UeasySplash.java     
+
+    2. View Amenity Information :
+       UEASY\it140\database\Database.java
+
+    3. Category :
+       UEASY\it140\specificCategories\BuildingCategory.java
+       UEASY\it140\specificCategories\RoomCategory.java
+
+    4. About
+       UEASY\it140\fragments\FaqFragment.java
+       UEASY\it140\activities\AboutAndFaqs.java
+
+    5. Search
+       UEASY\it140\activities\Search.java
+       UEASY\res\layout\search.xml
+
+
+[REMOVED FILES] -----------------------------------------------------
+
+    1. Map :
+       UEASY\it140\activities\BoundedMapView.java
+
+    
+[VIRUS CHECK] -------------------------------------------------------
+
+    1. Avast
+       Version 141121-0
+
+
+[SPECIAL COMMENTS] --------------------------------------------------
+
+    1.  Some content or information of the amenities are still subject for modification. 
+    2.  Images being used are not the actual images of each amenity
+    3.  The PC of the tester should be in a homegroup that can share files within the group. 
+
+[DESTINATION] -------------------------------------------------------
+- The release files can be accessed in the following location
+
+    1.  D:\UEASY
+
+
+[RELEASE MEMO] ------------------------------------------------------
+- The release notes is sent to the following recipients
+
+    1. Erwin Sarmiento       <esarmiento0302@gmail.com>
+    2. Jacob Borromeo        <lupyduby@gmail.com>
+    3. Gio Niño Mendoza      <mendoza.gionino@gmail.com>
+    4. Julius Adrian Chin    <jedaxxxx@gmail.com>
+
+
+
+=====================================================================
+
+APPROVED BY: Jacob Borromeo
+
+//nothing follows
