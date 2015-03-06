@@ -26,7 +26,8 @@
     7.  [MAP] To limit the amount of the redundant and/or irrelevant tiles, the scroll area is limited
     8.  [UPDATE] Requires  a computer to update contents.
     9.	[MAP] OSMDroid library bug on zoom when using offline tiles. Sometimes, it will have a flinging motion.
-    10. [UPDATE] Local update only.  
+    10. [UPDATE] Local update only.
+    11. [UPDATE] Internet connection required.
     
 
 [KNOWN BUGS] --------------------------------------------------------
@@ -38,7 +39,7 @@
 [RELEASE FILES] -----------------------------------------------------
 
     1. <APPLICATION FILENAME>
-     Filename: UEASY_2014_Release_05.00.apk
+     Filename: UEASY_2015_Release_05.00.apk
     2. <DATABASE BACKUP FILENAME>
      Filename: UEASY-DB_20141219_Release_05.00.backup
 
@@ -53,10 +54,14 @@
 [MODIFIED FILES]  ---------------------------------------------------
 
     1. Map :
-       UEASY\it140\activities\Map.java 
+       UEASY\it140\activities\Map.java
+       UEASY\it140\activities\Campus.java
 
     2. Category :
        UEASY\it140\activities\Category.java
+
+    3. Search :
+       UEASY\it140\res\layout\search.xml
 
 [REMOVED FILES] -----------------------------------------------------
 
