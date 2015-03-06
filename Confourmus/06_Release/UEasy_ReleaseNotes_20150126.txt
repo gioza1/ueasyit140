@@ -32,9 +32,9 @@
 [RELEASE FILES] -----------------------------------------------------
 
     1. <APPLICATION FILENAME>
-     Filename: UEASY_2014_Release_02.00.apk
+     Filename: UEASY_2014_Release_03.00.apk
     2. <DATABASE BACKUP FILENAME>
-     Filename: UEASY-DB_20141219_Release_02.00.backup
+     Filename: UEASY-DB_20141219_Release_03.00.backup
 
 
 [ADDED FILES] -------------------------------------------------------

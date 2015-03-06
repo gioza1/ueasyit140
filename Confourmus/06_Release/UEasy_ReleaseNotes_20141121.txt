@@ -29,9 +29,9 @@
 [RELEASE FILES] -----------------------------------------------------
 
     1. <APPLICATION FILENAME>
-     Filename: PROJECTNAME_YYYY_Release_02.00.15.tgz
+     Filename: UEASY_2014_Release_01.00.apk
     2. <DATABASE BACKUP FILENAME>
-     Filename: SDN-NWC-DB_20131025_Release_02.00.15.backup
+     Filename: UEASY-DB_20141219_Release_01.00.backup
 
 
 [ADDED FILES] -------------------------------------------------------
